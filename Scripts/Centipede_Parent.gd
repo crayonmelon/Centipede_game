@@ -15,7 +15,7 @@ func _ready():
 		add_child(centipede_part.instantiate())
 	
 	New_Centipede()
-	Change_Colour()
+	Change_Colour(0)
 
 func New_Centipede():
 	for _i in self.get_children():
@@ -43,31 +43,38 @@ func Died(node):
 	else:
 		return
 		
-	#Release Node:
-	if Centipede_Parts[node_index + 1] != null:
-		print(Centipede_Parts[node_index + 1].name)
-		Add_Parent(Centipede_Parts[node_index + 1])
-	
-	if Centipede_parents.has(node):
+	#remove from parents
+	if node.is_parent:
 		Centipede_parents.erase(node)
 		
+	#Release Node:
+	if Centipede_Parts[node_index + 1] != null:
+		Add_Parent(Centipede_Parts[node_index + 1])
+	
+
 	#Destroy Node:
 	Centipede_Parts[node_index].queue_free()
-	Centipede_Parts.erase(node)
+	Centipede_Parts.remove_at(node_index)
 	
+	Change_Colour(node_index)
 	
 func Add_Parent(node):
 	node.is_parent = true
-	Centipede_parents.append(node)
-	print((Centipede_parents.size()+1) % GLOBALS.C_CONTROLS.size())
 	
-	if Centipede_parents.size() > GLOBALS.C_CONTROLS.size():
-		return ((Centipede_parents.size()) % GLOBALS.C_CONTROLS.size())
-	else:
-		Centipede_parents.size()
+	Centipede_parents.append(node)
+	print(str(Centipede_parents.size()) + " parents")
+	print(Centipede_parents.size() % GLOBALS.C_CONTROLS.size())
 
+	node.controls_val = Centipede_parents.size() % GLOBALS.C_CONTROLS.size()
+	
 
-func Change_Colour():
-	for parts in Centipede_Parts:
-		parts.Sprite2D.modulate = GLOBALS.C_COLOURS[0]
-	pass
+func Change_Colour(start_val):
+	var col_val = 0
+	
+	for i in range(start_val, Centipede_Parts.size()):
+		
+		if Centipede_Parts[i].controls_val > col_val:
+			col_val = Centipede_Parts[i].controls_val
+		
+		Centipede_Parts[i].get_node("Sprite2D").modulate = GLOBALS.C_COLOURS[col_val]
+		
