@@ -1,4 +1,6 @@
-res://Centipede_Controls.gd
+res://scenes/GLOBALS.tscn
 res://world.tscn
-res://Centipede_Parent.gd
-res://Follow.gd
+res://scenes/centipede_body.tscn
+res://Scripts/Centipede_Parent.gd
+res://Scripts/Centipede_Controls.gd
+res://Scripts/GLOBALS.gd

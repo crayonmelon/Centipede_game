@@ -1,3 +1,12 @@
 2a60927148abd1d33b818b535e306557
-::res://::1679982932
-icon.svg::CompressedTexture2D::8550087954672885905::1679982922::1679982935::1::::<><>::
+::res://::1680135294
+icon.svg::CompressedTexture2D::8550087954672885905::1680123826::1680123826::1::::<><>::
+README.md::TextFile::-1::1680123826::0::1::::<><>::
+world.tscn::PackedScene::5713170689225439636::1680130210::0::1::::<><>::res://Scripts/Centipede_Parent.gd<>uid://cb43f81ox2b23
+::res://scenes/::1680130193
+centipede_body.tscn::PackedScene::4904607944762318014::1680130193::0::1::::<><>::res://Scripts/Centipede_Controls.gd<>uid://dt2yx1snpv2k0
+GLOBALS.tscn::PackedScene::7570465341229363907::1680130193::0::1::::<><>::res://Scripts/GLOBALS.gd
+::res://Scripts/::1680130145
+Centipede_Controls.gd::GDScript::-1::1680130006::0::1::::<>CharacterBody2D<>::
+Centipede_Parent.gd::GDScript::-1::1680130145::0::1::::<>Node2D<>::
+GLOBALS.gd::GDScript::-1::1680130100::0::1::::<>Node<>::

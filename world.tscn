@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://cnnrc7bvxh6ei"]
+
+[ext_resource type="Script" path="res://Scripts/Centipede_Parent.gd" id="1_hxdub"]
+[ext_resource type="PackedScene" uid="uid://cb43f81ox2b23" path="res://scenes/centipede_body.tscn" id="2_4d300"]
+
+[node name="World" type="Node2D"]
+
+[node name="Centipede" type="Node2D" parent="."]
+script = ExtResource("1_hxdub")
+
+[node name="Centipede_Body" parent="Centipede" instance=ExtResource("2_4d300")]
