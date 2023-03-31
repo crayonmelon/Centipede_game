@@ -12,13 +12,12 @@ var turn_speed = 2
 func _parent_move():
 	rotation_direction = Input.get_axis(GLOBALS.C_CONTROLS[controls_val][0], GLOBALS.C_CONTROLS[controls_val][1]) * turn_speed
 	velocity = transform.x * speed
-	
-	move_and_slide()
+
 
 func _child_move(delta):
-	global_position = global_position.lerp(following.global_position,.1)
+	global_position = global_position.lerp(following.global_position,.22)
 	look_at(following.global_position)
-	pass
+
 
 func _process(delta):
 	if is_parent:
@@ -36,7 +35,14 @@ func _process(delta):
 			
 	rotation += rotation_direction * rotation_speed * delta
 	
-func Dies():
+	move_and_slide()
 	
+	for i in get_slide_collision_count():
+		var collision = get_slide_collision(i)
+		if collision.get_collider().get_collision_layer() == 2:
+			Dies()
+			collision.get_collider().queue_free()
+
+func Dies():
 	get_parent().Died(self)
 	is_parent = true

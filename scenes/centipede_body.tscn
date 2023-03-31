@@ -1,19 +1,66 @@
-[gd_scene load_steps=4 format=3 uid="uid://cb43f81ox2b23"]
+[gd_scene load_steps=7 format=3 uid="uid://cb43f81ox2b23"]
 
 [ext_resource type="Script" path="res://Scripts/Centipede_Controls.gd" id="1_wyluf"]
-[ext_resource type="Texture2D" uid="uid://dt2yx1snpv2k0" path="res://icon.svg" id="2_uf0lt"]
+[ext_resource type="Texture2D" uid="uid://bqf2yg7qniewi" path="res://Sprite/CentipedeSpriteheet.png" id="2_mjpvs"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_60olk"]
+radius = 4.0
+
+[sub_resource type="Animation" id="Animation_hr4ps"]
+resource_name = "centipede_anim"
+length = 0.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+
+[sub_resource type="Animation" id="Animation_1r87x"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_sbd5m"]
+_data = {
+"RESET": SubResource("Animation_1r87x"),
+"centipede_anim": SubResource("Animation_hr4ps")
+}
 
 [node name="Centipede_Body" type="CharacterBody2D"]
 collision_layer = 0
-collision_mask = 0
+collision_mask = 2
 script = ExtResource("1_wyluf")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_60olk")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(3.8147e-06, 3.8147e-06)
-scale = Vector2(0.15625, 0.15625)
-texture = ExtResource("2_uf0lt")
+texture_filter = 1
+position = Vector2(3.57628e-07, -4.76837e-07)
+rotation = -3.14159
+texture = ExtResource("2_mjpvs")
+hframes = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
+autoplay = "centipede_anim"
+libraries = {
+"": SubResource("AnimationLibrary_sbd5m")
+}

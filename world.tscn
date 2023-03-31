@@ -1,7 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://cnnrc7bvxh6ei"]
+[gd_scene load_steps=6 format=3 uid="uid://cnnrc7bvxh6ei"]
 
 [ext_resource type="Script" path="res://Scripts/Centipede_Parent.gd" id="1_hxdub"]
 [ext_resource type="PackedScene" uid="uid://cb43f81ox2b23" path="res://scenes/centipede_body.tscn" id="2_4d300"]
+[ext_resource type="Script" path="res://Enemy.gd" id="3_vwpbq"]
+[ext_resource type="Texture2D" uid="uid://x34cgynde6m8" path="res://Sprite/WhiteSquare.png" id="3_ybqhk"]
+[ext_resource type="Script" path="res://Gun.gd" id="5_klkhb"]
 
 [node name="World" type="Node2D"]
 
@@ -9,3 +12,26 @@
 script = ExtResource("1_hxdub")
 
 [node name="Centipede_Body" parent="Centipede" instance=ExtResource("2_4d300")]
+collision_mask = 0
+
+[node name="Enemy" type="Node2D" parent="."]
+position = Vector2(128, 167)
+scale = Vector2(0.998879, 1)
+script = ExtResource("3_vwpbq")
+
+[node name="Sprite2D" type="Sprite2D" parent="Enemy"]
+scale = Vector2(2, 4)
+texture = ExtResource("3_ybqhk")
+
+[node name="Gun" type="Node2D" parent="Enemy"]
+position = Vector2(-2.28882e-05, -10)
+script = ExtResource("5_klkhb")
+
+[node name="Timer" type="Timer" parent="Enemy/Gun"]
+wait_time = 3.0
+autostart = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Enemy/Gun"]
+texture = ExtResource("3_ybqhk")
+
+[connection signal="timeout" from="Enemy/Gun/Timer" to="Enemy/Gun" method="_on_timer_timeout"]
