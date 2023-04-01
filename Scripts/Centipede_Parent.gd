@@ -24,6 +24,7 @@ func New_Centipede():
 	#Fist Parent
 	Centipede_Parts[0].is_parent = true
 	GLOBALS.CENTIPEDES_PARENTS.append(Centipede_Parts[0])
+	GLOBALS.CENTIPEDES_ENDS.append(Centipede_Parts[Centipede_Parts.size()-1])
 	
 	for i in len(Centipede_Parts):
 		if i == 0:
@@ -45,16 +46,41 @@ func Died(node):
 	#remove from parents
 	if node.is_parent:
 		GLOBALS.CENTIPEDES_PARENTS.erase(node)
-		
+	
+	if GLOBALS.CENTIPEDES_ENDS.has(node):
+		GLOBALS.CENTIPEDES_ENDS.erase(node)
+	
 	#Release Node:
-	if Centipede_Parts[node_index + 1] != null:
+	if Centipede_Parts.size() > node_index+1:
 		Add_Parent(Centipede_Parts[node_index + 1])
+	
+	if node_index -1 > 0:
+		GLOBALS.CENTIPEDES_ENDS.append(Centipede_Parts[node_index-1])
 	
 	#Destroy Node:
 	Centipede_Parts[node_index].queue_free()
 	Centipede_Parts.remove_at(node_index)
 	
 	Change_Colour(node_index)
+
+
+func Set_Sibling_Wrapping(node):
+	
+	GLOBALS.EDGING = false
+	
+	var node_index = -1
+	#Find Node ID
+	if Centipede_Parts.has(node):
+		node_index = Centipede_Parts.find(node)
+	else:
+		return
+	
+	if Centipede_Parts.size() > node_index+1:
+		Centipede_Parts[node_index + 1].wrapping = true
+		GLOBALS.EDGING = true
+		
+	else:
+		GLOBALS.EDGING = false
 
 
 func Add_Parent(node):

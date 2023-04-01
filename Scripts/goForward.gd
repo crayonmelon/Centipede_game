@@ -4,3 +4,6 @@ extends Node2D
 
 func _process(delta):
 	position += transform.x * speed * delta
+
+func die():
+	queue_free()

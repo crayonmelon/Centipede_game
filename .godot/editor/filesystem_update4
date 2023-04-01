@@ -1,9 +1,10 @@
-res://world.tscn
+res://scenes/Enemy.tscn
+res://Scripts/goForward.gd
 res://scenes/centipede_body.tscn
+res://world.tscn
 res://scenes/GLOBALS.tscn
-res://Scripts/Centipede_Controls.gd
+res://scenes/bullet.tscn
+res://Scripts/CameraFollow.gd
 res://Scripts/GLOBALS.gd
 res://Scripts/Centipede_Parent.gd
-res://Gun.gd
-res://scenes/bullet.tscn
-res://scenes/goForward.gd
+res://Scripts/Centipede_Controls.gd

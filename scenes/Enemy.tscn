@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3 uid="uid://b2ptabhsfdaap"]
+
+[ext_resource type="Texture2D" uid="uid://x34cgynde6m8" path="res://Sprite/WhiteSquare.png" id="1_4mxqa"]
+[ext_resource type="Script" path="res://Scripts/Gun.gd" id="2_o2sxq"]
+
+[node name="Enemy" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(2.98023e-08, 0)
+scale = Vector2(0.5, 1)
+texture = ExtResource("1_4mxqa")
+
+[node name="Gun" type="Node2D" parent="."]
+script = ExtResource("2_o2sxq")
+
+[node name="Gun_sprite" type="Sprite2D" parent="Gun"]
+position = Vector2(2, -1.5)
+scale = Vector2(1, 0.25)
+texture = ExtResource("1_4mxqa")
+
+[node name="Timer" type="Timer" parent="Gun"]
+wait_time = 3.0
+autostart = true
+
+[connection signal="timeout" from="Gun/Timer" to="Gun" method="_on_timer_timeout"]
