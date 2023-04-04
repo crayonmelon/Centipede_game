@@ -1,6 +1,6 @@
 extends Camera2D
 
-var screen_size = 160
+var screen_size = 220
 
 var max_size = false
 
@@ -8,7 +8,7 @@ var target = Vector2(0,0)
 
 func _process(delta):
 	camera_pos()
-	camera_scale()
+	camera_scale(delta)
 
 func camera_pos():
 	
@@ -30,14 +30,14 @@ func camera_pos():
 	global_position = global_position.lerp(target,.1)
 
 
-func camera_scale():
+func camera_scale(delta):
 	
-	var scale = 1.5
+	var scale = 3
 	zoom.x = scale
 	zoom.y = scale
 	var furthest_distance = 0
 	
-	for point in GLOBALS.CENTIPEDES_PARENTS + GLOBALS.CENTIPEDES_ENDS:
+	for point in GLOBALS.CENTIPEDES_PARENTS+ GLOBALS.CENTIPEDES_ENDS:
 		var x_dis = abs(position.x - point.global_position.x) 
 		var y_dis = abs(position.y - point.global_position.y)
 		
@@ -46,13 +46,13 @@ func camera_scale():
 	
 	scale = ((screen_size)/furthest_distance)
 	
-	if GLOBALS.EDGING or scale < .6:
+	if GLOBALS.CENTIPEDES_PARENTS.size() > 2:
 		max_size = true
-		zoom.x = lerpf(zoom.x,.5, .9)
-		zoom.y = lerpf(zoom.y,.5, .9)
+		zoom.x = lerpf(zoom.x,.8, 1)
+		zoom.y = lerpf(zoom.y,.8, 1)
 	
-	elif scale < 1.5: 
+	elif scale < 3: 
 		max_size = false
-		zoom.x = lerpf(zoom.x,scale, .9)
-		zoom.y = lerpf(zoom.y,scale, .9)
+		zoom.x = lerp(zoom.x,scale, 1)
+		zoom.y = lerp(zoom.y,scale, 1)
 		

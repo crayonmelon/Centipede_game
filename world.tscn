@@ -1,12 +1,51 @@
-[gd_scene load_steps=6 format=3 uid="uid://8gww200imsw4"]
+[gd_scene load_steps=10 format=3 uid="uid://bba62yxb412ry"]
 
 [ext_resource type="Script" path="res://Scripts/Centipede_Parent.gd" id="1_hxdub"]
+[ext_resource type="Script" path="res://Scripts/SpawnStuff.gd" id="1_slty4"]
 [ext_resource type="PackedScene" uid="uid://cb43f81ox2b23" path="res://scenes/centipede_body.tscn" id="2_4d300"]
 [ext_resource type="Texture2D" uid="uid://x34cgynde6m8" path="res://Sprite/WhiteSquare.png" id="3_ybqhk"]
-[ext_resource type="PackedScene" uid="uid://b2ptabhsfdaap" path="res://scenes/Enemy.tscn" id="4_4yurq"]
+[ext_resource type="Script" path="res://Scripts/Controls_Prompt.gd" id="6_0sxes"]
 [ext_resource type="Script" path="res://Scripts/CameraFollow.gd" id="6_x07qx"]
 
+[sub_resource type="Animation" id="Animation_0nocv"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_qo625"]
+resource_name = "bounce"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(0.32768, 3, 0.217638),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.1, 1.1), Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_iijpq"]
+_data = {
+"RESET": SubResource("Animation_0nocv"),
+"bounce": SubResource("Animation_qo625")
+}
+
 [node name="World" type="Node2D"]
+script = ExtResource("1_slty4")
 
 [node name="Background" type="Sprite2D" parent="."]
 modulate = Color(0.141176, 0.141176, 0.141176, 1)
@@ -22,4 +61,92 @@ collision_mask = 0
 [node name="Camera2D" type="Camera2D" parent="."]
 script = ExtResource("6_x07qx")
 
-[node name="Enemy" parent="." instance=ExtResource("4_4yurq")]
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Controls_0" type="RichTextLabel" parent="CanvasLayer"]
+anchors_preset = -1
+anchor_top = 0.887
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 40.0
+offset_top = 0.23999
+offset_right = -390.0
+offset_bottom = -29.0
+grow_horizontal = 2
+grow_vertical = 0
+pivot_offset = Vector2(25, 25)
+bbcode_enabled = true
+text = "[center]a / d"
+script = ExtResource("6_0sxes")
+show = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/Controls_0"]
+libraries = {
+"": SubResource("AnimationLibrary_iijpq")
+}
+
+[node name="Controls_1" type="RichTextLabel" parent="CanvasLayer"]
+anchors_preset = -1
+anchor_top = 0.887
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 130.0
+offset_top = 0.23999
+offset_right = -300.0
+offset_bottom = -29.0
+grow_horizontal = 2
+grow_vertical = 0
+pivot_offset = Vector2(25, 25)
+bbcode_enabled = true
+text = "[center]a / d"
+script = ExtResource("6_0sxes")
+id = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/Controls_1"]
+libraries = {
+"": SubResource("AnimationLibrary_iijpq")
+}
+
+[node name="Controls_2" type="RichTextLabel" parent="CanvasLayer"]
+anchors_preset = -1
+anchor_top = 0.887
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 300.0
+offset_top = 0.23999
+offset_right = -130.0
+offset_bottom = -29.0
+grow_horizontal = 2
+grow_vertical = 0
+pivot_offset = Vector2(25, 25)
+bbcode_enabled = true
+text = "[center]a / d"
+script = ExtResource("6_0sxes")
+id = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/Controls_2"]
+libraries = {
+"": SubResource("AnimationLibrary_iijpq")
+}
+
+[node name="Controls_3" type="RichTextLabel" parent="CanvasLayer"]
+anchors_preset = -1
+anchor_top = 0.887
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 390.0
+offset_top = 0.23999
+offset_right = -40.0
+offset_bottom = -29.0
+grow_horizontal = 2
+grow_vertical = 0
+pivot_offset = Vector2(25, 25)
+bbcode_enabled = true
+text = "[center]a / d"
+script = ExtResource("6_0sxes")
+id = 3
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/Controls_3"]
+libraries = {
+"": SubResource("AnimationLibrary_iijpq")
+}

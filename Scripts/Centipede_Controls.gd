@@ -16,7 +16,6 @@ func _parent_move():
 	rotation_direction = Input.get_axis(GLOBALS.C_CONTROLS[controls_val][0], GLOBALS.C_CONTROLS[controls_val][1]) * turn_speed
 	velocity = transform.x * speed
 
-
 func _child_move(delta):
 	
 	if !wrapping:
@@ -46,6 +45,7 @@ func _process(delta):
 	screen_wrap()
 
 func Dies():
+	
 	get_parent().Died(self)
 	is_parent = true
 
@@ -53,10 +53,10 @@ func screen_wrap():
 
 	if (position.x > GLOBALS.WORLD_BORDER_X_MAX or position.x < GLOBALS.WORLD_BORDER_X_MIN or 
 	position.y > GLOBALS.WORLD_BORDER_Y_MAX or position.y < GLOBALS.WORLD_BORDER_Y_MIN):
-			
+
 		get_parent().Set_Sibling_Wrapping(self)
 		wrapping = false
-		
-		
+
+
 	position.x = wrapf(position.x,GLOBALS.WORLD_BORDER_X_MIN, GLOBALS.WORLD_BORDER_X_MAX)
 	position.y = wrapf(position.y,GLOBALS.WORLD_BORDER_Y_MIN, GLOBALS.WORLD_BORDER_Y_MAX)

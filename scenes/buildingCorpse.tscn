@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://bymxfifm2ycd4"]
+
+[ext_resource type="Script" path="res://scenes/corpse.gd" id="1_bjkyx"]
+[ext_resource type="Texture2D" uid="uid://dsvx0ujf2vk3x" path="res://Sprite/building.png" id="2_5dtsk"]
+
+[node name="buildingCorpse" type="Node2D"]
+script = ExtResource("1_bjkyx")
+frame_min = 4
+
+[node name="Buildin" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("2_5dtsk")
+hframes = 4
+vframes = 2
+frame = 4
