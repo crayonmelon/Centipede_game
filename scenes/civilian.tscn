@@ -1,39 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://y1dcgawjtkhq"]
+[gd_scene load_steps=12 format=3 uid="uid://qduk7grj1t4s"]
 
-[ext_resource type="Script" path="res://scenes/civilian.gd" id="1_42xjr"]
+[ext_resource type="Script" path="res://Scripts/civilian.gd" id="1_u8udk"]
 [ext_resource type="Texture2D" uid="uid://do2dt0fouem4c" path="res://Sprite/civilian.png" id="2_jilas"]
+[ext_resource type="AudioStream" uid="uid://bd650ec6y8sto" path="res://Audio/Scream/screams_1.ogg" id="3_8hyv7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5xh4m"]
 size = Vector2(2, 4)
-
-[sub_resource type="Animation" id="Animation_2mu8a"]
-resource_name = "run"
-length = 0.3
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [-0.174533, 0.0, 0.174533, 0.0]
-}
 
 [sub_resource type="Animation" id="Animation_p2x3e"]
 length = 0.001
@@ -102,35 +74,6 @@ tracks/1/keys = {
 "values": [0.0, 6.28319]
 }
 
-[sub_resource type="Animation" id="Animation_apoeq"]
-resource_name = "walk"
-length = 0.6
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [1]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4, 0.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [-0.174533, 0.0, 0.174533, 0.0]
-}
-
 [sub_resource type="Animation" id="Animation_qu6hp"]
 resource_name = "die_2"
 length = 0.5
@@ -187,6 +130,64 @@ tracks/1/keys = {
 "values": [0.0, 1.5708]
 }
 
+[sub_resource type="Animation" id="Animation_2mu8a"]
+resource_name = "run"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [2, 3]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [-0.174533, 0.0, 0.174533, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_apoeq"]
+resource_name = "walk"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [-0.174533, 0.0, 0.174533, 0.0]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ehbts"]
 _data = {
 "RESET": SubResource("Animation_p2x3e"),
@@ -198,7 +199,7 @@ _data = {
 }
 
 [node name="Person" type="Area2D"]
-script = ExtResource("1_42xjr")
+script = ExtResource("1_u8udk")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -2)
@@ -208,12 +209,16 @@ shape = SubResource("RectangleShape2D_5xh4m")
 texture_filter = 1
 texture = ExtResource("2_jilas")
 offset = Vector2(0, -2)
-hframes = 2
+hframes = 4
 frame = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="civ"]
 libraries = {
 "": SubResource("AnimationLibrary_ehbts")
 }
+
+[node name="ScreamPlayer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_8hyv7")
+volume_db = -25.0
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

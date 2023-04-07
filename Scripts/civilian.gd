@@ -1,5 +1,7 @@
 extends Area2D
 
+var screams = [preload("res://Audio/Scream/screams_1.ogg"), preload("res://Audio/Scream/screams_2.ogg")]
+
 var goto = Vector2(0,0)
 var run = false
 
@@ -10,6 +12,10 @@ func _ready():
 	$civ/AnimationPlayer.play("run" if run else "walk")
 	invinso_event()
 	walk()
+	
+	if run and randf() >.5:
+		$ScreamPlayer.stream = screams[randi_range(0,screams.size()-1)]
+		$ScreamPlayer.play()
 
 func walk():
 	var tween = create_tween()
@@ -19,9 +25,11 @@ func walk():
 
 func _on_body_entered(body):
 	if !invisible:
+		$CollisionShape2D.queue_free()
+		
 		$civ/AnimationPlayer.play("die_2")
 		await $civ/AnimationPlayer.animation_finished
-		
+		GLOBALS.UPDATE_SCORE(1)
 		queue_free()
 
 func rand_Vector(range):

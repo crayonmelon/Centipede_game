@@ -15,3 +15,8 @@ extends Node
 @export var EXPLOSIONS = [preload("res://scenes/explosions/explosion_1.tscn"), preload("res://scenes/explosions/explosion_2.tscn"), preload("res://scenes/explosions/explosion_3.tscn"), preload("res://scenes/explosions/explosion_4.tscn")]
 
 var EDGING = false
+
+func UPDATE_SCORE(val):
+	get_tree().get_root().get_node("World/SCORE_CONTROLLER").increase_score(val)
+	
+

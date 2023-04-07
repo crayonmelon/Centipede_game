@@ -12,7 +12,7 @@ var centipede_part = preload("res://scenes/centipede_body.tscn")
 
 func _ready():
 	
-	for icon in $"../CanvasLayer".get_children():
+	for icon in $"../Controls".get_children():
 		Icons.append(icon)
 	
 	print(Icons.size())

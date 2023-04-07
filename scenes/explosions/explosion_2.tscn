@@ -1,6 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://dgo0o70jk7kq5"]
+[gd_scene load_steps=7 format=3]
 
-[ext_resource type="Script" path="res://scenes/explosion.gd" id="1_ovu5e"]
+[ext_resource type="Script" path="res://Scripts/explosion.gd" id="1_ovu5e"]
 [ext_resource type="Texture2D" uid="uid://ihgd64p6mqqu" path="res://Sprite/explosion/explosion_2.png" id="2_3dm54"]
 [ext_resource type="Script" path="res://Scripts/wiggle.gd" id="3_oloa8"]
 

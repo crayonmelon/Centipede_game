@@ -1,6 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://bymxfifm2ycd4"]
+[gd_scene load_steps=3 format=3]
 
-[ext_resource type="Script" path="res://scenes/corpse.gd" id="1_bjkyx"]
+[ext_resource type="Script" path="res://Scripts/corpse.gd" id="1_bjkyx"]
 [ext_resource type="Texture2D" uid="uid://dsvx0ujf2vk3x" path="res://Sprite/building.png" id="2_5dtsk"]
 
 [node name="buildingCorpse" type="Node2D"]

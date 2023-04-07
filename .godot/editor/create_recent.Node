@@ -1,3 +1,7 @@
+Timer
+Node
+CanvasLayer
+Label
 AudioStreamPlayer2D
 AnimationPlayer
 Sprite2D
@@ -5,9 +9,6 @@ Area2D
 CollisionShape2D
 StaticBody2D
 RichTextLabel
-CanvasLayer
-Timer
 Node2D
-Node
 Camera2D
 CharacterBody2D
