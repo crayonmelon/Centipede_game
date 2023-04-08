@@ -7,7 +7,7 @@ func _process(delta):
 	
 	var closest_fucker_distance = 999999
 	var closest_fucker = Vector2(0,0)
-	for centipede in GLOBALS.CENTIPEDES_PARENTS:
+	for centipede in GLOBALS.CAMERA_TRACK:
 		
 		var distance = position.distance_to(centipede.position) 
 		

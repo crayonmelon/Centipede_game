@@ -30,8 +30,8 @@ func New_Centipede():
 
 	#Fist Parent
 	Centipede_Parts[0].is_parent = true
-	GLOBALS.CENTIPEDES_PARENTS.append(Centipede_Parts[0])
-	GLOBALS.CENTIPEDES_ENDS.append(Centipede_Parts[Centipede_Parts.size()-1])
+	GLOBALS.CAMERA_TRACK.append(Centipede_Parts[0])
+	GLOBALS.CAMERA_TRACK.append(Centipede_Parts[Centipede_Parts.size()-1])
 	
 	for i in len(Centipede_Parts):
 		if i == 0:
@@ -49,25 +49,61 @@ func Died(node):
 		node_index = Centipede_Parts.find(node)
 	else:
 		return
-		
-	#remove from parents
-	if node.is_parent:
-		GLOBALS.CENTIPEDES_PARENTS.erase(node)
 	
-	if GLOBALS.CENTIPEDES_ENDS.has(node):
-		GLOBALS.CENTIPEDES_ENDS.erase(node)
+	if GLOBALS.CAMERA_TRACK.has(node):
+		GLOBALS.CAMERA_TRACK.erase(node)
+		
+	
+	#remove from camera_track
+	if node.is_parent:
+		GLOBALS.CAMERA_TRACK.erase(node)
 	
 	#Release Node:
-	if Centipede_Parts.size() > node_index+1:
+	if Centipede_Parts.size() > node_index+1 && node.is_parent:
 		Add_Parent(Centipede_Parts[node_index + 1])
+
+
+	elif Centipede_Parts.size() > node_index+1:
+		Centipede_Parts[node_index + 1].is_missile = true
 	
-	if node_index -1 > 0:
-		GLOBALS.CENTIPEDES_ENDS.append(Centipede_Parts[node_index-1])
+	Count_Centipede_Size()
 	
 	#Destroy Node:
 	Centipede_Parts[node_index].queue_free()
 	Centipede_Parts.remove_at(node_index)
+
+func Count_Centipede_Size():
 	
+	#count the size of every ssegment
+	var size = 0
+	var Centipede_Parents = []
+
+	#break up centipede
+	for part in reverse_array(Centipede_Parts):
+		if part.is_parent or part.is_missile:
+			Centipede_Parents.append([part, size])
+			size = 0
+		size+=1	
+		
+	Centipede_Parents.sort_custom(func(a, b): return a[1] > b[1])
+	
+	if Centipede_Parents[0][0].is_parent:
+		return
+	
+	##NEW PARENTS PAST THIS POINT##
+	
+	Centipede_Parents[0][0].is_parent = true
+	
+	#make smallest missiles
+	for i in range(Centipede_Parents.size()):
+		if i == 0:
+			continue
+			
+		Centipede_Parents[i][0].is_parent = false
+		Centipede_Parents[i][0].is_missile = true
+		
+	GLOBALS.CAMERA_TRACK = []
+	GLOBALS.CAMERA_TRACK.append(Centipede_Parents[0][0])
 
 func Set_Sibling_Wrapping(node):
 	
@@ -91,9 +127,8 @@ func Set_Sibling_Wrapping(node):
 func Add_Parent(node):
 	node.is_parent = true
 	
-	GLOBALS.CENTIPEDES_PARENTS.append(node)
+	GLOBALS.CAMERA_TRACK.append(node)
 	node.controls_val = 0
-	
 	
 func Change_Colour(start_val):
 	var col_val = 0
@@ -105,9 +140,18 @@ func Change_Colour(start_val):
 		
 		Centipede_Parts[i].get_node("Sprite2D").modulate = GLOBALS.C_COLOURS[col_val]
 
+func reverse_array(array):
+	var new_array = []
+	
+	for i in array:
+		new_array.push_front(i)
+		
+	return new_array
+	
+func sort_descending(a, b):
+	if a[0] > b[0]:
+		return true
+	return false
 
-func set_icon(id, enable):
-	for icon in Icons:
-		if icon.id == id:
-			icon.enable_text(enable)
-			return
+
+

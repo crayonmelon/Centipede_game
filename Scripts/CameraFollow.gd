@@ -16,16 +16,16 @@ func camera_pos():
 	var x_vals = 0 
 	var y_vals = 0
 	
-	for point in GLOBALS.CENTIPEDES_PARENTS:
-		x_vals += point.global_position.x
-		y_vals += point.global_position.y
+#	for point in GLOBALS.CAMERA_TRACK:
+#		x_vals += point.global_position.x
+#		y_vals += point.global_position.y
 	
-	var midPoint = Vector2((x_vals/GLOBALS.CENTIPEDES_PARENTS.size()), (y_vals/GLOBALS.CENTIPEDES_PARENTS.size()))
+#	var midPoint = Vector2((x_vals/GLOBALS.CAMERA_TRACK.size()), (y_vals/GLOBALS.CAMERA_TRACK.size()))
 	
-	if max_size:
-		midPoint = Vector2(0,0)
+#	if max_size:
+#		midPoint = Vector2(0,0)
 		
-	target = midPoint
+	target = GLOBALS.CAMERA_TRACK[0].position
 	
 	global_position = global_position.lerp(target,.1)
 
@@ -36,7 +36,7 @@ func camera_scale(delta):
 	zoom.y = scale
 	var furthest_distance = 0
 	
-	for point in GLOBALS.CENTIPEDES_PARENTS+ GLOBALS.CENTIPEDES_ENDS:
+	for point in GLOBALS.CAMERA_TRACK:
 		var x_dis = abs(position.x - point.global_position.x) 
 		var y_dis = abs(position.y - point.global_position.y)
 		
@@ -45,7 +45,7 @@ func camera_scale(delta):
 	
 	scale = ((screen_size)/furthest_distance)
 	
-	if GLOBALS.CENTIPEDES_PARENTS.size() > 2:
+	if GLOBALS.CAMERA_TRACK.size() > 2:
 		max_size = true
 		zoom.x = lerpf(zoom.x,.8, 1)
 		zoom.y = lerpf(zoom.y,.8, 1)

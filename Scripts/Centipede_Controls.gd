@@ -27,14 +27,14 @@ func _child_move(delta):
 	else:
 		global_position += transform.x * speed * delta
 
-func missile_move(delta):
+func _missile_move(delta):
 	global_position += transform.x * speed * delta
 
 func _process(delta):
 	if is_parent:
 		_parent_move()
 	elif is_missile:
-		missile_move(delta)
+		_missile_move(delta)
 	else:
 		_child_move(delta)
 	
