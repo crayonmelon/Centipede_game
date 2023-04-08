@@ -29,3 +29,10 @@ func Walk_To_player():
 func _on_timer_timeout():
 	Walk_To_player()
 	pass # Replace with function body.
+
+
+func _on_body_entered(body):
+	add_child(GLOBALS.EXPLOSIONS[randi_range(0,GLOBALS.EXPLOSIONS.size()-1)].instantiate())
+	queue_free()
+	GLOBALS.UPDATE_SCORE(1)
+	pass # Replace with function body.

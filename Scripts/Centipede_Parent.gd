@@ -68,8 +68,6 @@ func Died(node):
 	Centipede_Parts[node_index].queue_free()
 	Centipede_Parts.remove_at(node_index)
 	
-	Change_Colour(node_index)
-
 
 func Set_Sibling_Wrapping(node):
 	
@@ -94,8 +92,7 @@ func Add_Parent(node):
 	node.is_parent = true
 	
 	GLOBALS.CENTIPEDES_PARENTS.append(node)
-	node.controls_val = GLOBALS.CENTIPEDES_PARENTS.size() % GLOBALS.C_CONTROLS.size()
-	set_icon(GLOBALS.CENTIPEDES_PARENTS.size() % GLOBALS.C_CONTROLS.size(), true)
+	node.controls_val = 0
 	
 	
 func Change_Colour(start_val):

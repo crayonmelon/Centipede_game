@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
 @export var is_parent = false
+@export var is_missile = false
 @export var following : Node
 @export var controls_val = 0
 
@@ -26,9 +27,14 @@ func _child_move(delta):
 	else:
 		global_position += transform.x * speed * delta
 
+func missile_move(delta):
+	global_position += transform.x * speed * delta
+
 func _process(delta):
 	if is_parent:
 		_parent_move()
+	elif is_missile:
+		missile_move(delta)
 	else:
 		_child_move(delta)
 	
@@ -46,6 +52,7 @@ func _process(delta):
 
 func Dies():
 	
+	add_child(GLOBALS.EXPLOSIONS[randi_range(0,GLOBALS.EXPLOSIONS.size()-1)].instantiate())
 	get_parent().Died(self)
 	#is_parent = true
 

@@ -1,3 +1,13 @@
-res://world.tscn
+res://scenes/centipede_body.tscn
 res://Scripts/goForward.gd
+res://scenes/Walk_To_Player.gd
+res://scenes/Enemy.tscn
+res://Scripts/Centipede_Parent.gd
+res://scenes/Tank.tscn
+res://world.tscn
+res://scenes/GLOBALS.tscn
+res://scenes/bullet.tscn
+res://scenes/buildings/buildin.tscn
+res://scenes/civilian.tscn
+res://scenes/explosions/explosion_1.tscn
 res://Scripts/Centipede_Controls.gd

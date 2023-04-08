@@ -1,3 +1,5 @@
+CollisionShape2D
+Area2D
 Node
 Node2D
 AnimationPlayer
@@ -6,8 +8,6 @@ CanvasLayer
 Label
 AudioStreamPlayer2D
 Sprite2D
-Area2D
-CollisionShape2D
 StaticBody2D
 RichTextLabel
 Camera2D
