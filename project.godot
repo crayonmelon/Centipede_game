@@ -24,6 +24,7 @@ GLOBALS="*res://scenes/GLOBALS.tscn"
 window/size/viewport_width=480
 window/size/viewport_height=480
 window/stretch/mode="viewport"
+window/stretch/aspect="ignore"
 
 [input]
 

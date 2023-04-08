@@ -5,13 +5,15 @@ var peopleSpawn = 10
 var buildin = preload("res://scenes/buildings/buildin.tscn")
 var civ = preload("res://scenes/civilian.tscn")
 
-var enemy_1 = preload("res://scenes/Enemy.tscn")
+var enemy_fella = preload("res://scenes/Enemy.tscn")
+var enemy_tank = preload("res://scenes/Tank.tscn")
+
 
 func _ready():
 	Spawn_Stuff(buildin,30)
 	Spawn_Stuff(civ,15)
 	
-	Spawn_Enemies(enemy_1,3) 
+	#Spawn_Enemies(enemy_tank,3) 
 
 func Spawn_Stuff(spawny, num):
 	for n in range(num):

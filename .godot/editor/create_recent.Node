@@ -1,14 +1,14 @@
-Timer
 Node
+Node2D
+AnimationPlayer
+Timer
 CanvasLayer
 Label
 AudioStreamPlayer2D
-AnimationPlayer
 Sprite2D
 Area2D
 CollisionShape2D
 StaticBody2D
 RichTextLabel
-Node2D
 Camera2D
 CharacterBody2D

@@ -1,10 +1,3 @@
-res://scenes/Enemy.tscn
-res://Scripts/goForward.gd
-res://scenes/Walk_To_Player.gd
 res://world.tscn
-res://scenes/centipede_body.tscn
-res://scenes/GLOBALS.tscn
-res://scenes/bullet.tscn
-res://scenes/buildings/buildin.tscn
-res://scenes/civilian.tscn
-res://scenes/explosions/explosion_1.tscn
+res://Scripts/goForward.gd
+res://Scripts/Centipede_Controls.gd

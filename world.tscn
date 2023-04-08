@@ -1,6 +1,7 @@
-[gd_scene load_steps=12 format=3 uid="uid://8gww200imsw4"]
+[gd_scene load_steps=13 format=3 uid="uid://8gww200imsw4"]
 
 [ext_resource type="Script" path="res://Scripts/Centipede_Parent.gd" id="1_hxdub"]
+[ext_resource type="Script" path="res://LEVEL_MANAGER.gd" id="1_rrlbx"]
 [ext_resource type="Script" path="res://Scripts/SpawnStuff.gd" id="1_slty4"]
 [ext_resource type="PackedScene" uid="uid://cb43f81ox2b23" path="res://scenes/centipede_body.tscn" id="2_4d300"]
 [ext_resource type="Texture2D" uid="uid://x34cgynde6m8" path="res://Sprite/WhiteSquare.png" id="3_ybqhk"]
@@ -46,34 +47,24 @@ _data = {
 "bounce": SubResource("Animation_qo625")
 }
 
-[node name="World" type="Node2D"]
-script = ExtResource("1_slty4")
+[node name="LEVEL_MANAGER" type="Node"]
+script = ExtResource("1_rrlbx")
 
 [node name="SCORE_CONTROLLER" type="CanvasLayer" parent="."]
 script = ExtResource("8_ftavh")
 
 [node name="score_meter" type="Label" parent="SCORE_CONTROLLER"]
-offset_right = 256.0
+offset_right = 288.0
 offset_bottom = 23.0
-scale = Vector2(1, 0.5)
 theme_override_fonts/font = ExtResource("6_m1u4s")
-text = "SCORE: A BILLION"
+text = "CARNAGE: A BILLION"
 
 [node name="angery_meter" type="Label" parent="SCORE_CONTROLLER"]
-offset_top = 12.0
+offset_top = 18.0
 offset_right = 256.0
-offset_bottom = 35.0
-scale = Vector2(1, 0.5)
+offset_bottom = 41.0
 theme_override_fonts/font = ExtResource("6_m1u4s")
 text = "ANGERY: 14"
-
-[node name="combo_meter" type="Label" parent="SCORE_CONTROLLER"]
-offset_top = 24.0
-offset_right = 256.0
-offset_bottom = 47.0
-scale = Vector2(1, 0.5)
-theme_override_fonts/font = ExtResource("6_m1u4s")
-text = "COMBO: "
 
 [node name="combo_timer" type="Timer" parent="SCORE_CONTROLLER"]
 
@@ -176,6 +167,9 @@ modulate = Color(0.141176, 0.141176, 0.141176, 1)
 scale = Vector2(150, 150)
 texture = ExtResource("3_ybqhk")
 
+[node name="Spawner" type="Node2D" parent="."]
+script = ExtResource("1_slty4")
+
 [node name="Centipede" type="Node2D" parent="."]
 script = ExtResource("1_hxdub")
 
@@ -186,3 +180,4 @@ collision_mask = 0
 script = ExtResource("6_x07qx")
 
 [node name="SpawnEnemy" type="Timer" parent="."]
+wait_time = 5.0

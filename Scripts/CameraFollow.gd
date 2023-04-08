@@ -29,7 +29,6 @@ func camera_pos():
 	
 	global_position = global_position.lerp(target,.1)
 
-
 func camera_scale(delta):
 	
 	var scale = 3
@@ -53,6 +52,5 @@ func camera_scale(delta):
 	
 	elif scale < 3: 
 		max_size = false
-		zoom.x = lerp(zoom.x,scale, 1)
-		zoom.y = lerp(zoom.y,scale, 1)
-		
+		zoom.x = scale
+		zoom.y = scale

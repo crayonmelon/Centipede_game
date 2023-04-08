@@ -17,6 +17,5 @@ extends Node
 var EDGING = false
 
 func UPDATE_SCORE(val):
-	get_tree().get_root().get_node("World/SCORE_CONTROLLER").increase_score(val)
+	get_tree().get_root().get_node("LEVEL_MANAGER").increase_score(val)
 	
-

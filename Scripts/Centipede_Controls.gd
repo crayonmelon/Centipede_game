@@ -47,7 +47,7 @@ func _process(delta):
 func Dies():
 	
 	get_parent().Died(self)
-	is_parent = true
+	#is_parent = true
 
 func screen_wrap():
 
@@ -56,7 +56,6 @@ func screen_wrap():
 
 		get_parent().Set_Sibling_Wrapping(self)
 		wrapping = false
-
 
 	position.x = wrapf(position.x,GLOBALS.WORLD_BORDER_X_MIN, GLOBALS.WORLD_BORDER_X_MAX)
 	position.y = wrapf(position.y,GLOBALS.WORLD_BORDER_Y_MIN, GLOBALS.WORLD_BORDER_Y_MAX)

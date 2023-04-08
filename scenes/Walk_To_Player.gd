@@ -8,8 +8,6 @@ func _ready():
 	pass # Replace with function body.
 
 func _process(delta):
-	print(position)
-	
 	position.x = move_toward(position.x, target.x,delta*10)
 	position.y = move_toward(position.y, target.y,delta*10)
 	

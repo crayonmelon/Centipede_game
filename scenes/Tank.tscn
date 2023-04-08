@@ -1,0 +1,80 @@
+[gd_scene load_steps=8 format=3 uid="uid://c6kkvryhl68bu"]
+
+[ext_resource type="Script" path="res://scenes/Walk_To_Player.gd" id="1_vtorr"]
+[ext_resource type="Texture2D" uid="uid://dt6f5xx050xni" path="res://Sprite/tank/tank_bottom.png" id="2_vgoth"]
+[ext_resource type="Script" path="res://Scripts/Gun.gd" id="3_ak3ar"]
+[ext_resource type="Texture2D" uid="uid://t3x0qnhmqjlw" path="res://Sprite/tank/tank_top.png" id="4_3kelx"]
+
+[sub_resource type="Animation" id="Animation_2o64n"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_ndg03"]
+resource_name = "tank_anim"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1.07177),
+"update": 0,
+"values": [0, 9]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_v7sen"]
+_data = {
+"RESET": SubResource("Animation_2o64n"),
+"tank_anim": SubResource("Animation_ndg03")
+}
+
+[node name="Enemy" type="Node2D"]
+script = ExtResource("1_vtorr")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(2.98023e-08, 0)
+texture = ExtResource("2_vgoth")
+hframes = 3
+vframes = 4
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
+autoplay = "tank_anim"
+libraries = {
+"": SubResource("AnimationLibrary_v7sen")
+}
+
+[node name="Gun" type="Node2D" parent="."]
+position = Vector2(1, -1.5)
+rotation = 3.14159
+script = ExtResource("3_ak3ar")
+
+[node name="Gun_sprite" type="Sprite2D" parent="Gun"]
+texture_filter = 1
+position = Vector2(1.00001, -1.5)
+texture = ExtResource("4_3kelx")
+flip_h = true
+flip_v = true
+hframes = 3
+vframes = 4
+
+[node name="Timer" type="Timer" parent="Gun"]
+wait_time = 3.0
+autostart = true
+
+[connection signal="timeout" from="Gun/Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="Gun/Timer" to="Gun" method="_on_timer_timeout"]
