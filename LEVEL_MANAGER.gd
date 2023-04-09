@@ -45,7 +45,6 @@ func Enemy_Spawner():
 	
 	
 	spawn_timer.start(randi_range(5,7)) 
-	
 	await spawn_timer.timeout
 	
 	Enemy_Spawner()

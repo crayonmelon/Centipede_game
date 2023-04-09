@@ -1,23 +1,8 @@
-[gd_scene load_steps=7 format=3]
+[gd_scene load_steps=7 format=3 uid="uid://boyhtjeycyjl0"]
 
 [ext_resource type="Script" path="res://Scripts/explosion.gd" id="1_ovu5e"]
 [ext_resource type="Texture2D" uid="uid://ihgd64p6mqqu" path="res://Sprite/explosion/explosion_2.png" id="2_3dm54"]
 [ext_resource type="Script" path="res://Scripts/wiggle.gd" id="3_oloa8"]
-
-[sub_resource type="Animation" id="Animation_5mc1q"]
-resource_name = "explosion_1"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [0, 29]
-}
 
 [sub_resource type="Animation" id="Animation_4ugrs"]
 length = 0.001
@@ -34,6 +19,21 @@ tracks/0/keys = {
 "values": [0]
 }
 
+[sub_resource type="Animation" id="Animation_5mc1q"]
+resource_name = "explosion_1"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0, 29]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_nuhf5"]
 _data = {
 "RESET": SubResource("Animation_4ugrs"),
@@ -46,7 +46,7 @@ script = ExtResource("1_ovu5e")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
 position = Vector2(2, 0)
-scale = Vector2(0.3, 0.3)
+scale = Vector2(0.1, 0.1)
 texture = ExtResource("2_3dm54")
 hframes = 5
 vframes = 6

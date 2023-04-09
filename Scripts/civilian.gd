@@ -27,11 +27,22 @@ func _on_body_entered(body):
 	if !invisible:
 		$CollisionShape2D.queue_free()
 		
+		_random_death()
+		
+
+func _random_death():
+	var rand = randf()
+	
+	if rand > .5:
 		$civ/AnimationPlayer.play("die_2")
 		await $civ/AnimationPlayer.animation_finished
-		GLOBALS.UPDATE_SCORE(1)
-		queue_free()
-
+	else:
+		$civ.visible = false
+		$DiggingParticle.emitting = true
+		await get_tree().create_timer(1).timeout
+		
+	queue_free()
+	
 func rand_Vector(range):
 	return Vector2(
 		clamp(randi_range(global_position.x-range, global_position.x+range),GLOBALS.WORLD_BORDER_X_MIN,GLOBALS.WORLD_BORDER_X_MAX), 

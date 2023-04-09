@@ -8,5 +8,3 @@ extends CanvasLayer
 func increase_score(val):
 	
 	score_meter.text = "CARNAGE: " + str(val)
-
-

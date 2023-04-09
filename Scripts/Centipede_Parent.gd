@@ -11,12 +11,7 @@ var centipede_part = preload("res://scenes/centipede_body.tscn")
 
 
 func _ready():
-	
-	for icon in $"../Controls".get_children():
-		Icons.append(icon)
-	
-	print(Icons.size())
-	
+
 	for j in range(number_of_parts):
 		add_child(centipede_part.instantiate())
 	
@@ -107,6 +102,7 @@ func Count_Centipede_Size():
 	
 	Change_Colour()
 	
+	
 func Set_Sibling_Wrapping(node):
 	
 	GLOBALS.EDGING = false
@@ -125,6 +121,20 @@ func Set_Sibling_Wrapping(node):
 	else:
 		GLOBALS.EDGING = false
 
+func Set_Sibling_Tunneling(node):
+	
+	GLOBALS.EDGING = false
+	
+	var node_index = -1
+	#Find Node ID
+	if Centipede_Parts.has(node):
+		node_index = Centipede_Parts.find(node)
+	else:
+		return
+	
+	if Centipede_Parts.size() > node_index+1:
+		Centipede_Parts[node_index + 1].Start_Tunneling()
+		
 
 func Add_Parent(node):
 	node.is_parent = true
@@ -133,6 +143,8 @@ func Add_Parent(node):
 	node.controls_val = 0
 	
 func Change_Colour():
+	print("color ")
+	
 	var col_val = 0
 	
 	for i in range(Centipede_Parts.size()):
@@ -142,7 +154,7 @@ func Change_Colour():
 		elif Centipede_Parts[i].is_missile:
 			col_val = 2
 
-		Centipede_Parts[i].get_node("Sprite2D").modulate = GLOBALS.C_COLOURS[col_val]
+		Centipede_Parts[i].get_node("Sprite2D").material.set("shader_parameter/color_tint", GLOBALS.C_COLOURS[col_val])
 
 func reverse_array(array):
 	var new_array = []

@@ -1,10 +1,17 @@
-[gd_scene load_steps=7 format=3 uid="uid://cb43f81ox2b23"]
+[gd_scene load_steps=10 format=3 uid="uid://cb43f81ox2b23"]
 
 [ext_resource type="Script" path="res://Scripts/Centipede_Controls.gd" id="1_wyluf"]
+[ext_resource type="Shader" path="res://scenes/Dissolve.gdshader" id="2_a833f"]
 [ext_resource type="Texture2D" uid="uid://bqf2yg7qniewi" path="res://Sprite/CentipedeSpriteheet.png" id="2_mjpvs"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_60olk"]
 radius = 4.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_idcvn"]
+resource_local_to_scene = true
+shader = ExtResource("2_a833f")
+shader_parameter/sensitivity = 0.0
+shader_parameter/color_tint = Color(1, 1, 1, 1)
 
 [sub_resource type="Animation" id="Animation_1r87x"]
 length = 0.001
@@ -19,6 +26,18 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:material:shader_parameter/sensitivity")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
 }
 
 [sub_resource type="Animation" id="Animation_hr4ps"]
@@ -38,9 +57,26 @@ tracks/0/keys = {
 "values": [0, 1]
 }
 
+[sub_resource type="Animation" id="Animation_snvxr"]
+resource_name = "Tunneling"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/sensitivity")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.9, 0.8, 0.9, 0.8, 0.9, 0.8, 0.9, 0.8, 0.9]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_sbd5m"]
 _data = {
 "RESET": SubResource("Animation_1r87x"),
+"Tunneling": SubResource("Animation_snvxr"),
 "centipede_anim": SubResource("Animation_hr4ps")
 }
 
@@ -52,7 +88,9 @@ script = ExtResource("1_wyluf")
 shape = SubResource("CircleShape2D_60olk")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+self_modulate = Color(0.423529, 0, 0.423529, 1)
 texture_filter = 1
+material = SubResource("ShaderMaterial_idcvn")
 position = Vector2(3.57628e-07, -4.76837e-07)
 rotation = -3.14159
 texture = ExtResource("2_mjpvs")
@@ -63,3 +101,24 @@ autoplay = "centipede_anim"
 libraries = {
 "": SubResource("AnimationLibrary_sbd5m")
 }
+
+[node name="Timers" type="Node" parent="."]
+
+[node name="Tunneling_Timer" type="Timer" parent="Timers"]
+
+[node name="DiggingParticle" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 2
+lifetime = 0.1
+fixed_fps = 30
+draw_order = 1
+emission_shape = 1
+emission_sphere_radius = 2.48
+direction = Vector2(0, 0)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_max = 41.53
+angle_min = -747.4
+angle_max = 720.0
+
+[connection signal="timeout" from="Timers/Tunneling_Timer" to="." method="_on_tunneling_timer_timeout"]

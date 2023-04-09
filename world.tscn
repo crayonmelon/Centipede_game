@@ -5,47 +5,27 @@
 [ext_resource type="Script" path="res://Scripts/SpawnStuff.gd" id="1_slty4"]
 [ext_resource type="PackedScene" uid="uid://cb43f81ox2b23" path="res://scenes/centipede_body.tscn" id="2_4d300"]
 [ext_resource type="Texture2D" uid="uid://x34cgynde6m8" path="res://Sprite/WhiteSquare.png" id="3_ybqhk"]
-[ext_resource type="Script" path="res://Scripts/Controls_Prompt.gd" id="6_0sxes"]
+[ext_resource type="Script" path="res://text_scroll.gd" id="4_1tpkm"]
+[ext_resource type="Shader" path="res://EarthBound.gdshader" id="6_bcnsi"]
 [ext_resource type="FontFile" uid="uid://br7gfki6pqkqu" path="res://Font/AtariClassicChunky.ttf" id="6_m1u4s"]
+[ext_resource type="Texture2D" uid="uid://dt2yx1snpv2k0" path="res://icon.svg" id="6_ud3w4"]
 [ext_resource type="Script" path="res://Scripts/CameraFollow.gd" id="6_x07qx"]
 [ext_resource type="Script" path="res://score_check.gd" id="8_ftavh"]
 
-[sub_resource type="Animation" id="Animation_0nocv"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_qo625"]
-resource_name = "bounce"
-length = 0.2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2),
-"transitions": PackedFloat32Array(0.32768, 3, 0.217638),
-"update": 0,
-"values": [Vector2(1, 1), Vector2(1.1, 1.1), Vector2(1, 1)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_iijpq"]
-_data = {
-"RESET": SubResource("Animation_0nocv"),
-"bounce": SubResource("Animation_qo625")
-}
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_e77nb"]
+shader = ExtResource("6_bcnsi")
+shader_parameter/screen_height = 640.0
+shader_parameter/amplitude = 0.2
+shader_parameter/frequency = 200.0
+shader_parameter/speed = 6.0
+shader_parameter/amplitude_vertical = 4.0
+shader_parameter/frequency_vertical = 4.0
+shader_parameter/speed_vertical = 4.0
+shader_parameter/scroll_direction = Vector2(6, 6)
+shader_parameter/scrolling_speed = 0.08
+shader_parameter/enable_palette_cycling = true
+shader_parameter/palette_speed = 0.456
+shader_parameter/palette = ExtResource("6_ud3w4")
 
 [node name="LEVEL_MANAGER" type="Node"]
 script = ExtResource("1_rrlbx")
@@ -66,104 +46,37 @@ offset_bottom = 41.0
 theme_override_fonts/font = ExtResource("6_m1u4s")
 text = "ANGERY: 14"
 
+[node name="text_scroll" type="Label" parent="SCORE_CONTROLLER"]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1.0
+offset_top = -23.0
+offset_right = 687.0
+offset_bottom = 15.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(0.5, 0.5)
+theme_override_fonts/font = ExtResource("6_m1u4s")
+text = "CENTIPEDE CENTIPEDE CENTIPEDE CENTIPEDE CENTIPEDE CENTIPEDE CENTI
+
+"
+script = ExtResource("4_1tpkm")
+
+[node name="Timer" type="Timer" parent="SCORE_CONTROLLER/text_scroll"]
+wait_time = 0.2
+autostart = true
+
 [node name="combo_timer" type="Timer" parent="SCORE_CONTROLLER"]
 
-[node name="Controls" type="CanvasLayer" parent="."]
-
-[node name="Controls_0" type="RichTextLabel" parent="Controls"]
-anchors_preset = -1
-anchor_top = 0.887
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 40.0
-offset_top = 0.23999
-offset_right = -340.0
-offset_bottom = -29.0
-grow_horizontal = 2
-grow_vertical = 0
-pivot_offset = Vector2(25, 25)
-theme_override_fonts/normal_font = ExtResource("6_m1u4s")
-bbcode_enabled = true
-text = "[center]a / d"
-script = ExtResource("6_0sxes")
-show = true
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Controls/Controls_0"]
-libraries = {
-"": SubResource("AnimationLibrary_iijpq")
-}
-
-[node name="Controls_1" type="RichTextLabel" parent="Controls"]
-anchors_preset = -1
-anchor_top = 0.887
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 130.0
-offset_top = 0.23999
-offset_right = -250.0
-offset_bottom = -29.0
-grow_horizontal = 2
-grow_vertical = 0
-pivot_offset = Vector2(25, 25)
-theme_override_fonts/normal_font = ExtResource("6_m1u4s")
-bbcode_enabled = true
-text = "[center]a / d"
-script = ExtResource("6_0sxes")
-id = 1
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Controls/Controls_1"]
-libraries = {
-"": SubResource("AnimationLibrary_iijpq")
-}
-
-[node name="Controls_2" type="RichTextLabel" parent="Controls"]
-anchors_preset = -1
-anchor_top = 0.887
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 300.0
-offset_top = 0.23999
-offset_right = -80.0
-offset_bottom = -29.0
-grow_horizontal = 2
-grow_vertical = 0
-pivot_offset = Vector2(25, 25)
-theme_override_fonts/normal_font = ExtResource("6_m1u4s")
-bbcode_enabled = true
-text = "[center]a / d"
-script = ExtResource("6_0sxes")
-id = 2
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Controls/Controls_2"]
-libraries = {
-"": SubResource("AnimationLibrary_iijpq")
-}
-
-[node name="Controls_3" type="RichTextLabel" parent="Controls"]
-anchors_preset = -1
-anchor_top = 0.887
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 390.0
-offset_top = 0.23999
-offset_right = 10.0
-offset_bottom = -29.0
-grow_horizontal = 2
-grow_vertical = 0
-pivot_offset = Vector2(25, 25)
-theme_override_fonts/normal_font = ExtResource("6_m1u4s")
-bbcode_enabled = true
-text = "[center]a / d"
-script = ExtResource("6_0sxes")
-id = 3
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Controls/Controls_3"]
-libraries = {
-"": SubResource("AnimationLibrary_iijpq")
-}
+[node name="Background_Background" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_e77nb")
+scale = Vector2(350, 350)
+texture = ExtResource("3_ybqhk")
 
 [node name="Background" type="Sprite2D" parent="."]
-modulate = Color(0.141176, 0.141176, 0.141176, 1)
+modulate = Color(0, 0, 0, 1)
 scale = Vector2(150, 150)
 texture = ExtResource("3_ybqhk")
 
@@ -181,3 +94,5 @@ script = ExtResource("6_x07qx")
 
 [node name="SpawnEnemy" type="Timer" parent="."]
 wait_time = 5.0
+
+[connection signal="timeout" from="SCORE_CONTROLLER/text_scroll/Timer" to="SCORE_CONTROLLER/text_scroll" method="_on_timer_timeout"]

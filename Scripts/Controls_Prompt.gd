@@ -14,5 +14,6 @@ func enable_text(enable):
 	visible = enable
 
 func _input(event):
-	if event.is_action_pressed(GLOBALS.C_CONTROLS[id][0]) or event.is_action_pressed(GLOBALS.C_CONTROLS[id][1]):
-		$AnimationPlayer.play("bounce")
+#	if event.is_action_pressed(GLOBALS.C_CONTROLS[id][0]) or event.is_action_pressed(GLOBALS.C_CONTROLS[id][1]):
+#		$AnimationPlayer.play("bounce")
+	pass

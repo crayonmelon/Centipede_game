@@ -1,35 +1,78 @@
-[gd_scene load_steps=5 format=3 uid="uid://b2ptabhsfdaap"]
+[gd_scene load_steps=9 format=3 uid="uid://b2ptabhsfdaap"]
 
-[ext_resource type="Texture2D" uid="uid://x34cgynde6m8" path="res://Sprite/WhiteSquare.png" id="1_4mxqa"]
 [ext_resource type="Script" path="res://scenes/Walk_To_Player.gd" id="1_jmxj1"]
-[ext_resource type="Script" path="res://Scripts/Gun.gd" id="2_o2sxq"]
+[ext_resource type="Texture2D" uid="uid://d2jqitn6h66pn" path="res://Sprite/bus.png" id="2_4n3k5"]
+
+[sub_resource type="Shader" id="Shader_wb24b"]
+code = "// NOTE: Shader automatically converted from Godot Engine 4.0.1.stable's CanvasItemMaterial.
+
+shader_type canvas_item;
+render_mode blend_mix;
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lvw2h"]
+shader = SubResource("Shader_wb24b")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tvjkg"]
-size = Vector2(2, 4)
+size = Vector2(12, 5)
 
-[node name="Enemy" type="Area2D"]
+[sub_resource type="Animation" id="Animation_1t4qc"]
+resource_name = "bus_loop"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="Animation" id="Animation_6gfhn"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6iple"]
+_data = {
+"RESET": SubResource("Animation_6gfhn"),
+"bus_loop": SubResource("Animation_1t4qc")
+}
+
+[node name="Bus" type="Area2D"]
+material = SubResource("ShaderMaterial_lvw2h")
 script = ExtResource("1_jmxj1")
+explode_with_passion = true
+number_of_people_range = Vector2i(30, 30)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -0.5)
 shape = SubResource("RectangleShape2D_tvjkg")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
 position = Vector2(2.98023e-08, 0)
-scale = Vector2(0.5, 1)
-texture = ExtResource("1_4mxqa")
+texture = ExtResource("2_4n3k5")
+vframes = 4
 
-[node name="Gun" type="Node2D" parent="."]
-script = ExtResource("2_o2sxq")
-
-[node name="Gun_sprite" type="Sprite2D" parent="Gun"]
-position = Vector2(2, -1.5)
-scale = Vector2(1, 0.25)
-texture = ExtResource("1_4mxqa")
-
-[node name="Timer" type="Timer" parent="Gun"]
-wait_time = 3.0
-autostart = true
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
+libraries = {
+"": SubResource("AnimationLibrary_6iple")
+}
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
-[connection signal="timeout" from="Gun/Timer" to="." method="_on_timer_timeout"]
-[connection signal="timeout" from="Gun/Timer" to="Gun" method="_on_timer_timeout"]
