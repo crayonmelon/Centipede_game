@@ -21,7 +21,7 @@ func _ready():
 		add_child(centipede_part.instantiate())
 	
 	New_Centipede()
-	Change_Colour(0)
+	
 
 
 func New_Centipede():
@@ -104,7 +104,9 @@ func Count_Centipede_Size():
 		
 	GLOBALS.CAMERA_TRACK = []
 	GLOBALS.CAMERA_TRACK.append(Centipede_Parents[0][0])
-
+	
+	Change_Colour()
+	
 func Set_Sibling_Wrapping(node):
 	
 	GLOBALS.EDGING = false
@@ -130,14 +132,16 @@ func Add_Parent(node):
 	GLOBALS.CAMERA_TRACK.append(node)
 	node.controls_val = 0
 	
-func Change_Colour(start_val):
+func Change_Colour():
 	var col_val = 0
 	
-	for i in range(start_val, Centipede_Parts.size()):
+	for i in range(Centipede_Parts.size()):
 		
-		if Centipede_Parts[i].controls_val > col_val:
-			col_val = Centipede_Parts[i].controls_val
-		
+		if Centipede_Parts[i].is_parent:
+			col_val = 0
+		elif Centipede_Parts[i].is_missile:
+			col_val = 2
+
 		Centipede_Parts[i].get_node("Sprite2D").modulate = GLOBALS.C_COLOURS[col_val]
 
 func reverse_array(array):

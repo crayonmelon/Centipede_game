@@ -9,8 +9,6 @@ var enemy_tank = preload("res://scenes/Tank.tscn")
 
 var enemies_cost = [[enemy_fella, 5], [enemy_tank, 15]]
 
-
-
 var current_angery = 1
 var current_score = 0
 

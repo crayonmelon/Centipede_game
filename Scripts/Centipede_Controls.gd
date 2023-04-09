@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+var health = 3
+
 @export var is_parent = false
 @export var is_missile = false
 @export var following : Node
@@ -28,6 +30,7 @@ func _child_move(delta):
 		global_position += transform.x * speed * delta
 
 func _missile_move(delta):
+	rotation_direction = 0
 	global_position += transform.x * speed * delta
 
 func _process(delta):
@@ -51,10 +54,12 @@ func _process(delta):
 	screen_wrap()
 
 func Dies():
+	health -= 1
 	
-	add_child(GLOBALS.EXPLOSIONS[randi_range(0,GLOBALS.EXPLOSIONS.size()-1)].instantiate())
-	get_parent().Died(self)
-	#is_parent = true
+	if health <=0:
+		GLOBALS.EXPLODE_EFFECT(self.global_position)
+		get_parent().Died(self)
+		#is_parent = true
 
 func screen_wrap():
 

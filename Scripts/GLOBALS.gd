@@ -18,3 +18,9 @@ var EDGING = false
 func UPDATE_SCORE(val):
 	get_tree().get_root().get_node("LEVEL_MANAGER").increase_score(val)
 	
+func EXPLODE_EFFECT(pos):
+	var explode = EXPLOSIONS[randi_range(0,GLOBALS.EXPLOSIONS.size()-1)].instantiate()
+	explode.position = pos
+
+	get_tree().get_root().add_child(explode)
+

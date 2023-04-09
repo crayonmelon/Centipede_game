@@ -9,5 +9,6 @@ res://scenes/civilian.tscn
 res://scenes/explosions/explosion_1.tscn
 res://scenes/Tank.tscn
 res://Scripts/Centipede_Parent.gd
-res://Scripts/CameraFollow.gd
 res://LEVEL_MANAGER.gd
+res://Scripts/Centipede_Controls.gd
+res://Scripts/GLOBALS.gd
