@@ -3,7 +3,6 @@
 [ext_resource type="Script" path="res://Scripts/Centipede_Parent.gd" id="1_hxdub"]
 [ext_resource type="Script" path="res://LEVEL_MANAGER.gd" id="1_rrlbx"]
 [ext_resource type="Script" path="res://Scripts/SpawnStuff.gd" id="1_slty4"]
-[ext_resource type="PackedScene" uid="uid://cb43f81ox2b23" path="res://scenes/centipede_body.tscn" id="2_4d300"]
 [ext_resource type="Texture2D" uid="uid://x34cgynde6m8" path="res://Sprite/WhiteSquare.png" id="3_ybqhk"]
 [ext_resource type="Script" path="res://text_scroll.gd" id="4_1tpkm"]
 [ext_resource type="Shader" path="res://EarthBound.gdshader" id="6_bcnsi"]
@@ -11,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://dt2yx1snpv2k0" path="res://icon.svg" id="6_ud3w4"]
 [ext_resource type="Script" path="res://Scripts/CameraFollow.gd" id="6_x07qx"]
 [ext_resource type="Script" path="res://score_check.gd" id="8_ftavh"]
+[ext_resource type="PackedScene" uid="uid://b2ptabhsfdaap" path="res://scenes/Enemies/Enemy_Bus.tscn" id="12_c8yn6"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_e77nb"]
 shader = ExtResource("6_bcnsi")
@@ -86,13 +86,13 @@ script = ExtResource("1_slty4")
 [node name="Centipede" type="Node2D" parent="."]
 script = ExtResource("1_hxdub")
 
-[node name="Centipede_Body" parent="Centipede" instance=ExtResource("2_4d300")]
-collision_mask = 0
-
 [node name="Camera2D" type="Camera2D" parent="."]
 script = ExtResource("6_x07qx")
 
 [node name="SpawnEnemy" type="Timer" parent="."]
 wait_time = 5.0
+
+[node name="Bus" parent="." instance=ExtResource("12_c8yn6")]
+position = Vector2(273, 55)
 
 [connection signal="timeout" from="SCORE_CONTROLLER/text_scroll/Timer" to="SCORE_CONTROLLER/text_scroll" method="_on_timer_timeout"]

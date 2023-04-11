@@ -12,6 +12,8 @@ extends Node
 @export var WORLD_BORDER_Y_MAX = 300
 
 @export var EXPLOSIONS = [preload("res://scenes/explosions/explosion_1.tscn"), preload("res://scenes/explosions/explosion_2.tscn"), preload("res://scenes/explosions/explosion_3.tscn"), preload("res://scenes/explosions/explosion_4.tscn")]
+var Audio_node = preload("res://scenes/explosions/Audio.tscn")
+
 
 var EDGING = false
 
@@ -24,3 +26,9 @@ func EXPLODE_EFFECT(pos):
 
 	get_tree().get_root().add_child(explode)
 
+func PLAY_BOOM(pos):
+	var noise = Audio_node.instantiate()
+	noise.position = pos
+	
+	get_tree().get_root().add_child(noise)
+	

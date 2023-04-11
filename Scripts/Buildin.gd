@@ -12,7 +12,6 @@ func _ready():
 	$Buildin.texture = building_types[randi_range(0, building_types.size()-1)]
 	
 func _on_body_entered(body):
-	print("yoo")
 	if !started:
 		started = true
 		_spawn_people()

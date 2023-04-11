@@ -1,8 +1,8 @@
 [gd_scene load_steps=7 format=3 uid="uid://dp5wu3ahqy8nd"]
 
-[ext_resource type="Script" path="res://scenes/Walk_To_Player.gd" id="1_c668j"]
-[ext_resource type="Texture2D" uid="uid://x34cgynde6m8" path="res://Sprite/WhiteSquare.png" id="2_j8nct"]
-[ext_resource type="Script" path="res://Scripts/Gun.gd" id="3_f18kk"]
+[ext_resource type="Script" path="res://scenes/Walk_To_Player.gd" id="1_70asu"]
+[ext_resource type="Texture2D" uid="uid://x34cgynde6m8" path="res://Sprite/WhiteSquare.png" id="2_0235h"]
+[ext_resource type="Script" path="res://Scripts/Gun.gd" id="3_cuhmo"]
 
 [sub_resource type="Shader" id="Shader_wb24b"]
 code = "// NOTE: Shader automatically converted from Godot Engine 4.0.1.stable's CanvasItemMaterial.
@@ -19,7 +19,7 @@ size = Vector2(2, 4)
 
 [node name="Enemy" type="Area2D"]
 material = SubResource("ShaderMaterial_lvw2h")
-script = ExtResource("1_c668j")
+script = ExtResource("1_70asu")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_tvjkg")
@@ -27,15 +27,15 @@ shape = SubResource("RectangleShape2D_tvjkg")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(2.98023e-08, 0)
 scale = Vector2(0.5, 1)
-texture = ExtResource("2_j8nct")
+texture = ExtResource("2_0235h")
 
 [node name="Gun" type="Node2D" parent="."]
-script = ExtResource("3_f18kk")
+script = ExtResource("3_cuhmo")
 
 [node name="Gun_sprite" type="Sprite2D" parent="Gun"]
 position = Vector2(2, -1.5)
 scale = Vector2(1, 0.25)
-texture = ExtResource("2_j8nct")
+texture = ExtResource("2_0235h")
 
 [node name="Timer" type="Timer" parent="Gun"]
 wait_time = 3.0

@@ -33,6 +33,7 @@ func _child_move(delta):
 	elif !wrapping:
 		follow_target = following.global_position
 		global_position = global_position.lerp(follow_target,.22)
+
 		look_at(follow_target)
 	else:
 		global_position += transform.x * speed * delta
@@ -105,7 +106,7 @@ func Start_Tunneling():
 	
 	await get_tree().create_timer(.1).timeout
 	$DiggingParticle.emitting = true
-	$CollisionShape2D.disabled = true
+	$CollisionShape.disabled = true
 	started_tunneling = false 
 	tunneling = true
 	
@@ -118,13 +119,11 @@ func Start_Tunneling():
 	$DiggingParticle.emitting = false
 	$Sprite2D.visible = true
 	tunneling = false
-	$CollisionShape2D.disabled = false
+	$CollisionShape.disabled = false
 	
 	
 	Change_Shader_Params()
 	$Sprite2D/AnimationPlayer.play("centipede_anim")
-	
-	
 	
 func _on_tunneling_timer_timeout():
 	$Sprite2D.visible = true

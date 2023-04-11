@@ -4,10 +4,13 @@ extends Node
 @onready var score_controller = $SCORE_CONTROLLER
 @onready var spawn_timer = $SpawnEnemy
 
-var enemy_fella = preload("res://scenes/Enemy.tscn")
-var enemy_tank = preload("res://scenes/Tank.tscn")
+enum DIR {NORTH, SOUTH, EAST, WEST, NONE}
 
-var enemies_cost = [[enemy_fella, 5], [enemy_tank, 15]]
+var enemy_fella = preload("res://scenes/Enemies/Enemy_gunner.tscn")
+var enemy_tank = preload("res://scenes/Enemies/Tank.tscn")
+var enemy_bus = preload("res://scenes/Enemies/Enemy_Bus.tscn")
+
+var enemies_cost = [[enemy_fella, 5, DIR.NONE], [enemy_tank, 15, DIR.NONE], [enemy_bus, 25, DIR.EAST]]
 
 var current_angery = 1
 var current_score = 0
@@ -16,6 +19,9 @@ var difficulty = 0
 var started = false
 
 var budget = 0
+
+func _ready():
+	DisplayServer.window_set_size(Vector2(958, 720))
 
 func difficulty_check(val):
 	
@@ -41,9 +47,11 @@ func Enemy_Spawner():
 		budget -= enemies_cost[ran][1]
 		
 		if enemies_cost[ran][1] < budget:
-			Spawn_Stuff(enemies_cost[ran][0], 1)
-	
-	
+			var obj = enemies_cost[ran][0].instantiate()
+			print("enemies_cost[ran][2]", enemies_cost[ran][2])
+			obj.global_position = rand_outside_border(enemies_cost[ran][2])
+			add_child(obj)
+
 	spawn_timer.start(randi_range(5,7)) 
 	await spawn_timer.timeout
 	
@@ -60,3 +68,23 @@ func rand_Vector():
 	return Vector2(
 		randi_range(GLOBALS.WORLD_BORDER_X_MIN, GLOBALS.WORLD_BORDER_X_MAX), 
 		randi_range(GLOBALS.WORLD_BORDER_Y_MIN, GLOBALS.WORLD_BORDER_Y_MAX))
+		
+func rand_outside_border(direction = DIR.NONE):
+	
+	if direction == DIR.NONE:
+		direction = DIR.values()[randi_range(0,3)]
+		
+	if direction == DIR.NORTH:
+		return Vector2(randi_range(GLOBALS.WORLD_BORDER_X_MIN, GLOBALS.WORLD_BORDER_X_MAX), GLOBALS.WORLD_BORDER_Y_MIN)
+		
+	elif direction == DIR.EAST:
+		return Vector2(GLOBALS.WORLD_BORDER_X_MAX, randi_range(GLOBALS.WORLD_BORDER_Y_MIN, GLOBALS.WORLD_BORDER_Y_MAX))
+			
+	elif direction == DIR.SOUTH:
+		return Vector2(randi_range(GLOBALS.WORLD_BORDER_X_MIN, GLOBALS.WORLD_BORDER_X_MAX), GLOBALS.WORLD_BORDER_Y_MAX)
+		
+	elif direction == DIR.WEST:
+		return Vector2(GLOBALS.WORLD_BORDER_X_MIN, randi_range(GLOBALS.WORLD_BORDER_Y_MIN, GLOBALS.WORLD_BORDER_Y_MAX))
+		
+	else:
+		return Vector2(0,0)

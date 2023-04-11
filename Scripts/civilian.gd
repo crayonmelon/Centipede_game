@@ -26,7 +26,7 @@ func walk():
 func _on_body_entered(body):
 	if !invisible:
 		$CollisionShape2D.queue_free()
-		
+		GLOBALS.UPDATE_SCORE(1)
 		_random_death()
 		
 
@@ -40,7 +40,8 @@ func _random_death():
 		$civ.visible = false
 		$DiggingParticle.emitting = true
 		await get_tree().create_timer(1).timeout
-		
+	
+	
 	queue_free()
 	
 func rand_Vector(range):

@@ -5,9 +5,6 @@ var peopleSpawn = 10
 var buildin = preload("res://scenes/buildings/buildin.tscn")
 var civ = preload("res://scenes/civilian.tscn")
 
-var enemy_fella = preload("res://scenes/Enemy.tscn")
-var enemy_tank = preload("res://scenes/Tank.tscn")
-
 
 func _ready():
 	Spawn_Stuff(buildin,30)

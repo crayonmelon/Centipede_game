@@ -28,7 +28,6 @@ func Walk_To_player():
 	
 	target = closest_fucker
 
-
 func _on_timer_timeout():
 	Walk_To_player()
 
