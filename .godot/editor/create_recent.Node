@@ -1,12 +1,12 @@
+AudioStreamPlayer2D
+AnimationPlayer
 CanvasLayer
 AudioStreamPlayer
 Sprite2D
 Node2D
 Timer
-AnimationPlayer
 Label
 Button
-AudioStreamPlayer2D
 StaticBody2D
 GPUParticles2D
 Node

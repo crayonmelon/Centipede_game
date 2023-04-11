@@ -34,7 +34,7 @@ func _on_timer_timeout():
 
 func _on_body_entered(body):
 	add_child(GLOBALS.EXPLOSIONS[randi_range(0,GLOBALS.EXPLOSIONS.size()-1)].instantiate())
-	GLOBALS.EXPLODE_EFFECT(self.global_position)
+	GLOBALS.EXPLODE_EFFECT(self.global_position, true)
 	GLOBALS.UPDATE_SCORE(score)
 	
 	if explode_with_passion:

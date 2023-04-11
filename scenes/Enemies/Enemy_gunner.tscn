@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://dp5wu3ahqy8nd"]
+[gd_scene load_steps=8 format=3 uid="uid://dp5wu3ahqy8nd"]
 
 [ext_resource type="Script" path="res://scenes/Walk_To_Player.gd" id="1_70asu"]
 [ext_resource type="Texture2D" uid="uid://x34cgynde6m8" path="res://Sprite/WhiteSquare.png" id="2_0235h"]
 [ext_resource type="Script" path="res://Scripts/Gun.gd" id="3_cuhmo"]
+[ext_resource type="AudioStream" uid="uid://bavayhukohdw3" path="res://Audio/Effects/gun_shot.ogg" id="4_nnlk7"]
 
 [sub_resource type="Shader" id="Shader_wb24b"]
 code = "// NOTE: Shader automatically converted from Godot Engine 4.0.1.stable's CanvasItemMaterial.
@@ -40,6 +41,10 @@ texture = ExtResource("2_0235h")
 [node name="Timer" type="Timer" parent="Gun"]
 wait_time = 3.0
 autostart = true
+
+[node name="GunSound" type="AudioStreamPlayer2D" parent="Gun"]
+stream = ExtResource("4_nnlk7")
+max_distance = 200.0
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="timeout" from="Gun/Timer" to="." method="_on_timer_timeout"]

@@ -1,7 +1,7 @@
 extends Area2D
 
 var screams = [preload("res://Audio/Scream/screams_1.ogg"), preload("res://Audio/Scream/screams_2.ogg"), preload("res://Audio/Scream/scream_3.ogg"), preload("res://Audio/Scream/scream_4.ogg"), preload("res://Audio/Scream/scream_5.ogg")]
-var splat = preload("res://Audio/splatt.ogg")
+var splat = preload("res://Audio/Effects/splatt.ogg")
 var goto = Vector2(0,0)
 var run = false
 

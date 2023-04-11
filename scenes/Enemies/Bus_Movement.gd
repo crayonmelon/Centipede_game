@@ -3,6 +3,8 @@ extends StaticBody2D
 var speed = 80
 var score = 10
 var civ = preload("res://scenes/collateral/civilian.tscn")
+var boom_sound = preload("res://Audio/Explosion/carcrash.ogg")
+
 
 func _process(delta):
 	position.x -= delta * speed
@@ -13,7 +15,7 @@ func die():
 	$CollisionShape2D.disabled = true
 	
 	GLOBALS.EXPLODE_EFFECT(self.global_position)
-	GLOBALS.PLAY_BOOM(self.global_position)
+	GLOBALS.PLAY_BOOM(self.global_position, boom_sound)
 	
 	GLOBALS.UPDATE_SCORE(score)
 	

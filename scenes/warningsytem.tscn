@@ -73,5 +73,5 @@ vertical_alignment = 1
 stream = ExtResource("4_0ppy4")
 autoplay = true
 
-[connection signal="timeout" from="Scroll/scroll_timer" to="Scroll" method="_on_scroll_timer_timeout"]
 [connection signal="timeout" from="Scroll/scroll_timer" to="." method="_on_scroll_timer_timeout"]
+[connection signal="timeout" from="Scroll/scroll_timer" to="Scroll" method="_on_scroll_timer_timeout"]

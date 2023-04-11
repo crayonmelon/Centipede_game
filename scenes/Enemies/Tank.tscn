@@ -1,9 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://c6kkvryhl68bu"]
+[gd_scene load_steps=11 format=3 uid="uid://c6kkvryhl68bu"]
 
 [ext_resource type="Script" path="res://scenes/Walk_To_Player.gd" id="1_8q8cr"]
 [ext_resource type="Texture2D" uid="uid://dt6f5xx050xni" path="res://Sprite/tank/tank_bottom.png" id="2_inlsx"]
 [ext_resource type="Script" path="res://Scripts/Gun.gd" id="3_wi3m0"]
 [ext_resource type="Texture2D" uid="uid://t3x0qnhmqjlw" path="res://Sprite/tank/tank_top.png" id="4_h6lmh"]
+[ext_resource type="AudioStream" uid="uid://n8wpkr8v86t5" path="res://Audio/Effects/tank_shot.ogg" id="5_dfh8q"]
+[ext_resource type="AudioStream" uid="uid://cmp7m7bi6bgoe" path="res://Audio/Effects/rumble.ogg" id="5_mkhlu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5og6n"]
 size = Vector2(10, 6)
@@ -83,6 +85,15 @@ vframes = 4
 [node name="Timer" type="Timer" parent="Gun"]
 wait_time = 3.0
 autostart = true
+
+[node name="GunSound" type="AudioStreamPlayer2D" parent="Gun"]
+stream = ExtResource("5_dfh8q")
+max_distance = 500.0
+
+[node name="Rumble" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_mkhlu")
+autoplay = true
+max_distance = 500.0
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="timeout" from="Gun/Timer" to="." method="_on_timer_timeout"]

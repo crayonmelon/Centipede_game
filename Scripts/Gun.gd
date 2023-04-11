@@ -3,6 +3,9 @@ extends Node2D
 var target = null
 var bullet = preload("res://scenes/bullet.tscn")
 
+func _ready():
+	$Timer.wait_time = randf_range(2,4)
+
 func _process(delta):
 	
 	var closest_fucker_distance = 999999
@@ -24,3 +27,4 @@ func _on_timer_timeout():
 	bullet_inst.position = global_position
 	bullet_inst.rotation = global_rotation
 	get_tree().get_root().add_child(bullet_inst)
+	$GunSound.play()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://8gww200imsw4"]
+[gd_scene load_steps=19 format=3 uid="uid://8gww200imsw4"]
 
 [ext_resource type="Script" path="res://Scripts/Centipede_Parent.gd" id="1_hxdub"]
 [ext_resource type="Script" path="res://LEVEL_MANAGER.gd" id="1_rrlbx"]
@@ -11,6 +11,80 @@
 [ext_resource type="Script" path="res://Scripts/CameraFollow.gd" id="6_x07qx"]
 [ext_resource type="Script" path="res://score_check.gd" id="8_ftavh"]
 [ext_resource type="PackedScene" uid="uid://b2ptabhsfdaap" path="res://scenes/Enemies/Enemy_Bus.tscn" id="12_c8yn6"]
+
+[sub_resource type="Animation" id="Animation_yut0r"]
+resource_name = "Shake"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(1, 1), Vector2(0, 0), Vector2(-1, -1), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_h4j57"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_sfev4"]
+_data = {
+"RESET": SubResource("Animation_h4j57"),
+"Shake": SubResource("Animation_yut0r")
+}
+
+[sub_resource type="Animation" id="Animation_esfug"]
+resource_name = "Shake"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45145, 0.5, 0.55145, 0.60145, 0.65145, 0.70145, 0.75145, 0.80145),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(0, 18), Vector2(1, 19), Vector2(0, 18), Vector2(-1, 17), Vector2(0, 18), Vector2(1, 19), Vector2(0, 18), Vector2(-1, 17), Vector2(0, 18), Vector2(1, 19), Vector2(0, 18), Vector2(-1, 17), Vector2(0, 18), Vector2(1, 19), Vector2(0, 18), Vector2(-1, 17), Vector2(0, 18)]
+}
+
+[sub_resource type="Animation" id="Animation_r40ha"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 18)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mb8sp"]
+_data = {
+"RESET": SubResource("Animation_r40ha"),
+"Shake": SubResource("Animation_esfug")
+}
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_e77nb"]
 shader = ExtResource("6_bcnsi")
@@ -37,14 +111,24 @@ script = ExtResource("8_ftavh")
 offset_right = 288.0
 offset_bottom = 23.0
 theme_override_fonts/font = ExtResource("6_m1u4s")
-text = "CARNAGE: A BILLION"
+text = "CARNAGE: NULL"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="SCORE_CONTROLLER/score_meter"]
+libraries = {
+"": SubResource("AnimationLibrary_sfev4")
+}
 
 [node name="angery_meter" type="Label" parent="SCORE_CONTROLLER"]
 offset_top = 18.0
-offset_right = 256.0
+offset_right = 479.0
 offset_bottom = 41.0
 theme_override_fonts/font = ExtResource("6_m1u4s")
-text = "ANGERY: 14"
+text = "TASK: CAUSE CARNAGE"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="SCORE_CONTROLLER/angery_meter"]
+libraries = {
+"": SubResource("AnimationLibrary_mb8sp")
+}
 
 [node name="text_scroll" type="Label" parent="SCORE_CONTROLLER"]
 anchors_preset = 12
