@@ -1,0 +1,77 @@
+[gd_scene load_steps=5 format=3 uid="uid://cgymtpl2jyxjj"]
+
+[ext_resource type="FontFile" uid="uid://br7gfki6pqkqu" path="res://Font/AtariClassicChunky.ttf" id="1_htkyl"]
+[ext_resource type="Texture2D" uid="uid://x34cgynde6m8" path="res://Sprite/WhiteSquare.png" id="2_kyvxo"]
+[ext_resource type="Script" path="res://scenes/Core/WaveUpdate.gd" id="2_oh8pw"]
+[ext_resource type="AudioStream" uid="uid://0nkjiha7wbvq" path="res://Audio/Explosion/warning.ogg" id="4_0ppy4"]
+
+[node name="WARNINGSYTEM" type="CanvasLayer"]
+script = ExtResource("2_oh8pw")
+
+[node name="BG" type="Sprite2D" parent="."]
+modulate = Color(1, 0, 0, 1)
+position = Vector2(240, 240)
+scale = Vector2(85, 5)
+texture = ExtResource("2_kyvxo")
+
+[node name="Scroll" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -176.0
+offset_top = -11.5
+offset_right = 176.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("1_htkyl")
+text = "THREAT LEVEL INCREASED"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="scroll_timer" type="Timer" parent="Scroll"]
+wait_time = 0.2
+autostart = true
+
+[node name="Announcement" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -176.0
+offset_top = -33.0
+offset_right = 176.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("1_htkyl")
+text = "EMERGANCY ALERT"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Warning_Level" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -176.0
+offset_top = 12.0
+offset_right = 176.0
+offset_bottom = 35.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("1_htkyl")
+text = "THREAT LEVEL 1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_0ppy4")
+autoplay = true
+
+[connection signal="timeout" from="Scroll/scroll_timer" to="Scroll" method="_on_scroll_timer_timeout"]
+[connection signal="timeout" from="Scroll/scroll_timer" to="." method="_on_scroll_timer_timeout"]

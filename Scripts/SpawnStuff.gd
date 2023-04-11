@@ -3,7 +3,7 @@ extends Node2D
 var peopleSpawn = 10
 
 var buildin = preload("res://scenes/buildings/buildin.tscn")
-var civ = preload("res://scenes/civilian.tscn")
+var civ = preload("res://scenes/collateral/civilian.tscn")
 
 
 func _ready():

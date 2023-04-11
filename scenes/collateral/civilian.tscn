@@ -1,8 +1,8 @@
 [gd_scene load_steps=12 format=3 uid="uid://qduk7grj1t4s"]
 
-[ext_resource type="Script" path="res://Scripts/civilian.gd" id="1_u8udk"]
-[ext_resource type="Texture2D" uid="uid://do2dt0fouem4c" path="res://Sprite/civilian.png" id="2_jilas"]
-[ext_resource type="AudioStream" uid="uid://bd650ec6y8sto" path="res://Audio/Scream/screams_1.ogg" id="3_8hyv7"]
+[ext_resource type="Script" path="res://Scripts/civilian.gd" id="1_dkwm3"]
+[ext_resource type="Texture2D" uid="uid://do2dt0fouem4c" path="res://Sprite/civilian.png" id="2_53oat"]
+[ext_resource type="AudioStream" uid="uid://bd650ec6y8sto" path="res://Audio/Scream/screams_1.ogg" id="3_0vsxb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5xh4m"]
 size = Vector2(2, 4)
@@ -200,7 +200,7 @@ _data = {
 
 [node name="Person" type="Area2D"]
 collision_mask = 7
-script = ExtResource("1_u8udk")
+script = ExtResource("1_dkwm3")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -2)
@@ -208,7 +208,7 @@ shape = SubResource("RectangleShape2D_5xh4m")
 
 [node name="civ" type="Sprite2D" parent="."]
 texture_filter = 1
-texture = ExtResource("2_jilas")
+texture = ExtResource("2_53oat")
 offset = Vector2(0, -2)
 hframes = 4
 frame = 1
@@ -219,7 +219,7 @@ libraries = {
 }
 
 [node name="ScreamPlayer" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("3_8hyv7")
+stream = ExtResource("3_0vsxb")
 volume_db = -25.0
 
 [node name="DiggingParticle" type="CPUParticles2D" parent="."]

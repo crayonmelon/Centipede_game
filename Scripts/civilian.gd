@@ -1,7 +1,7 @@
 extends Area2D
 
-var screams = [preload("res://Audio/Scream/screams_1.ogg"), preload("res://Audio/Scream/screams_2.ogg")]
-
+var screams = [preload("res://Audio/Scream/screams_1.ogg"), preload("res://Audio/Scream/screams_2.ogg"), preload("res://Audio/Scream/scream_3.ogg"), preload("res://Audio/Scream/scream_4.ogg"), preload("res://Audio/Scream/scream_5.ogg")]
+var splat = preload("res://Audio/splatt.ogg")
 var goto = Vector2(0,0)
 var run = false
 
@@ -32,7 +32,10 @@ func _on_body_entered(body):
 
 func _random_death():
 	var rand = randf()
-	
+
+	$ScreamPlayer.stream = splat
+	$ScreamPlayer.play()
+
 	if rand > .5:
 		$civ/AnimationPlayer.play("die_2")
 		await $civ/AnimationPlayer.animation_finished
@@ -40,7 +43,6 @@ func _random_death():
 		$civ.visible = false
 		$DiggingParticle.emitting = true
 		await get_tree().create_timer(1).timeout
-	
 	
 	queue_free()
 	

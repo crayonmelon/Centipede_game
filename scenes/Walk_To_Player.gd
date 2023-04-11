@@ -2,7 +2,7 @@ extends Node2D
 @export var score = 10
 @export var explode_with_passion = false
 @export var number_of_people_range : Vector2i = Vector2i(1,5)
-var civ = preload("res://scenes/civilian.tscn")
+var civ = preload("res://scenes/collateral/civilian.tscn")
 var target = null
 
 # Called when the node enters the scene tree for the first time.

@@ -6,6 +6,10 @@ extends Node
 
 enum DIR {NORTH, SOUTH, EAST, WEST, NONE}
 
+var WAVE = 0
+
+var warning_system = preload("res://scenes/warningsytem.tscn")
+
 var enemy_fella = preload("res://scenes/Enemies/Enemy_gunner.tscn")
 var enemy_tank = preload("res://scenes/Enemies/Tank.tscn")
 var enemy_bus = preload("res://scenes/Enemies/Enemy_Bus.tscn")
@@ -23,19 +27,32 @@ var budget = 0
 func _ready():
 	DisplayServer.window_set_size(Vector2(958, 720))
 
-func difficulty_check(val):
+func Wave_Update(val):
 	
-	if started: return
+	if current_score > 100 and WAVE <= 0:
+		Wave_Change(1)
+
+func Wave_Change(wave_val):
+	WAVE = wave_val
+	print("WAVE CHANGE")
 	
-	if current_score > 100:
-		started = true
-		difficulty +=1
+	var warn_system = warning_system.instantiate()
+	warn_system.wave_val = wave_val
+	add_child(warn_system)
+	
+	WAVE_SPAWN()
+	#Update Colours + text 
+	
+func WAVE_SPAWN():
+	
+	if WAVE == 1:
 		Enemy_Spawner()
+	pass
 
 func increase_score(val):
 	current_score += val * current_angery
 	budget += val * current_angery
-	difficulty_check(current_score)
+	Wave_Update(current_score)
 	score_controller.increase_score(current_score)
 
 func Enemy_Spawner():
@@ -55,7 +72,7 @@ func Enemy_Spawner():
 	spawn_timer.start(randi_range(5,7)) 
 	await spawn_timer.timeout
 	
-	Enemy_Spawner()
+	WAVE_SPAWN()
 
 func Spawn_Stuff(spawny, num):
 	for n in range(num):

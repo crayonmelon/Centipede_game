@@ -2,7 +2,7 @@ extends StaticBody2D
 
 var speed = 80
 var score = 10
-var civ = preload("res://scenes/civilian.tscn")
+var civ = preload("res://scenes/collateral/civilian.tscn")
 
 func _process(delta):
 	position.x -= delta * speed

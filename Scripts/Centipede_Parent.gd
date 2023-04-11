@@ -16,7 +16,6 @@ func _ready():
 		add_child(centipede_part.instantiate())
 	
 	New_Centipede()
-	
 
 
 func New_Centipede():

@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://omkpbl3rkiu8"]
+
+[ext_resource type="Script" path="res://scenes/Main_Menu.gd" id="1_gukwh"]
+[ext_resource type="FontFile" uid="uid://br7gfki6pqkqu" path="res://Font/AtariClassicChunky.ttf" id="2_b6djx"]
+
+[node name="Main_Menu" type="Node2D"]
+script = ExtResource("1_gukwh")
+
+[node name="START" type="Button" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 202.0
+offset_top = 388.0
+offset_right = 258.0
+offset_bottom = 419.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_b6djx")
+button_mask = 5
+text = "START"
+
+[connection signal="pressed" from="START" to="." method="_on_start_pressed"]

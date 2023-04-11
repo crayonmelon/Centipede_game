@@ -2,7 +2,7 @@ extends Node2D
 
 var building_types = [preload("res://Sprite/building/building_1.png"), preload("res://Sprite/building/building_2.png"), preload("res://Sprite/building/building_3.png"), preload("res://Sprite/building/building_4.png")]
 
-var civ = preload("res://scenes/civilian.tscn")
+var civ = preload("res://scenes/collateral/civilian.tscn")
 var explosion = preload("res://scenes/explosions/explosion_4.tscn")
 var started = false
 
