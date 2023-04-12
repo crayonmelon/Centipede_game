@@ -1,0 +1,86 @@
+[gd_scene load_steps=10 format=3 uid="uid://cqoyb7upvuo1i"]
+
+[ext_resource type="Script" path="res://scenes/Enemies/HeliMovement.gd" id="1_bdbgh"]
+[ext_resource type="Texture2D" uid="uid://bgyy7q1bbn8vm" path="res://Sprite/plane.png" id="2_8nstd"]
+[ext_resource type="AudioStream" uid="uid://dgiut1m1q30ih" path="res://Audio/Effects/helicopter.ogg" id="3_se4h3"]
+
+[sub_resource type="Shader" id="Shader_wb24b"]
+code = "// NOTE: Shader automatically converted from Godot Engine 4.0.1.stable's CanvasItemMaterial.
+
+shader_type canvas_item;
+render_mode blend_mix;
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lvw2h"]
+shader = SubResource("Shader_wb24b")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3r3o2"]
+size = Vector2(18.5, 8)
+
+[sub_resource type="Animation" id="Animation_4v2lu"]
+resource_name = "Heli"
+length = 0.3
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0, 5]
+}
+
+[sub_resource type="Animation" id="Animation_x2quq"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_88s78"]
+_data = {
+"Heli": SubResource("Animation_4v2lu"),
+"RESET": SubResource("Animation_x2quq")
+}
+
+[node name="Enemy" type="StaticBody2D"]
+material = SubResource("ShaderMaterial_lvw2h")
+script = ExtResource("1_bdbgh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.25, 0)
+shape = SubResource("RectangleShape2D_3r3o2")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(2.98023e-08, 0)
+texture = ExtResource("2_8nstd")
+hframes = 2
+vframes = 3
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
+autoplay = "Heli"
+libraries = {
+"": SubResource("AnimationLibrary_88s78")
+}
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_se4h3")
+autoplay = true
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

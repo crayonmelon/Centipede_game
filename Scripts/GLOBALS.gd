@@ -15,8 +15,6 @@ extends Node
 @export var EXPLOSIONS_SOUND = [preload("res://Audio/Explosion/explosion_0.ogg"), preload("res://Audio/Explosion/explosion_1.ogg"), preload("res://Audio/Explosion/explosion_2.ogg")]
 
 var Audio_node = preload("res://scenes/explosions/Audio.tscn")
-
-
 var EDGING = false
 
 func UPDATE_SCORE(val):
@@ -43,3 +41,16 @@ func PLAY_BOOM(pos, audio, play_rand_sound = false):
 	
 	get_tree().get_root().add_child(noise)
 	
+enum Enemy_Type {BUILDING, CIVILIAN, TANK, GUNNER, BUS, HELICOPTER}
+var ENEMY_KILLS = {Enemy_Type.BUILDING: 0, Enemy_Type.CIVILIAN: 0, Enemy_Type.TANK:0, Enemy_Type.GUNNER:0, Enemy_Type.BUS: 0, Enemy_Type.HELICOPTER: 0}
+
+func ADD_KILLS(enemy_type : Enemy_Type):
+	ENEMY_KILLS[enemy_type] += 1
+
+func FIND_KILLS(enemy_type : Enemy_Type):
+	return ENEMY_KILLS[enemy_type]
+
+var Colour_Material_O = preload("res://Shader/Colour_0_Material.tres")
+
+func CHANGE_COLOUR(colour):
+	Colour_Material_O.set("shader_parameter/color_tint", colour)

@@ -1,7 +1,13 @@
-[gd_scene load_steps=7 format=3 uid="uid://cdre527gjglv8"]
+[gd_scene load_steps=10 format=3 uid="uid://cxhj5i036c6tk"]
 
 [ext_resource type="Script" path="res://Scripts/Buildin.gd" id="1_jafip"]
 [ext_resource type="Texture2D" uid="uid://dsvx0ujf2vk3x" path="res://Sprite/building.png" id="1_srr7j"]
+[ext_resource type="Shader" path="res://scenes/Sprite_Asset.gdshader" id="1_y64mv"]
+[ext_resource type="Material" uid="uid://cmpmxbmcuhodl" path="res://Shader/Colour_0_Material.tres" id="3_2imkb"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4qa67"]
+shader = ExtResource("1_y64mv")
+shader_parameter/color_tint = Color(1, 0, 1, 1)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5xh4m"]
 size = Vector2(12, 20)
@@ -68,6 +74,7 @@ _data = {
 }
 
 [node name="StaticBody2D" type="Area2D"]
+material = SubResource("ShaderMaterial_4qa67")
 script = ExtResource("1_jafip")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -75,6 +82,7 @@ shape = SubResource("RectangleShape2D_5xh4m")
 
 [node name="Buildin" type="Sprite2D" parent="."]
 texture_filter = 1
+material = ExtResource("3_2imkb")
 texture = ExtResource("1_srr7j")
 hframes = 4
 vframes = 2

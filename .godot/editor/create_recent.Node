@@ -1,13 +1,13 @@
+Timer
 AudioStreamPlayer2D
+StaticBody2D
 AnimationPlayer
+Sprite2D
 CanvasLayer
 AudioStreamPlayer
-Sprite2D
 Node2D
-Timer
 Label
 Button
-StaticBody2D
 GPUParticles2D
 Node
 CollisionShape2D

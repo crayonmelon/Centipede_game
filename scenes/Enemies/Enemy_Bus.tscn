@@ -1,6 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://b2ptabhsfdaap"]
+[gd_scene load_steps=11 format=3 uid="uid://b58bwfue3m0gg"]
 
 [ext_resource type="Script" path="res://scenes/Enemies/Bus_Movement.gd" id="1_dl868"]
+[ext_resource type="Shader" path="res://Scripts/Sprite_Asset.gdshader" id="2_5frip"]
 [ext_resource type="Texture2D" uid="uid://d2jqitn6h66pn" path="res://Sprite/bus.png" id="2_tvarq"]
 
 [sub_resource type="Shader" id="Shader_wb24b"]
@@ -15,6 +16,10 @@ shader = SubResource("Shader_wb24b")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tvjkg"]
 size = Vector2(12, 5)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_a80r7"]
+render_priority = 0
+shader = ExtResource("2_5frip")
 
 [sub_resource type="Animation" id="Animation_6gfhn"]
 length = 0.001
@@ -66,6 +71,7 @@ shape = SubResource("RectangleShape2D_tvjkg")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
+material = SubResource("ShaderMaterial_a80r7")
 texture = ExtResource("2_tvarq")
 vframes = 4
 

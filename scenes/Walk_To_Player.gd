@@ -1,7 +1,11 @@
 extends Node2D
+
+@export var enemy_type = GLOBALS.Enemy_Type.TANK
+
 @export var score = 10
 @export var explode_with_passion = false
 @export var number_of_people_range : Vector2i = Vector2i(1,5)
+
 var civ = preload("res://scenes/collateral/civilian.tscn")
 var target = null
 
@@ -36,6 +40,8 @@ func _on_body_entered(body):
 	add_child(GLOBALS.EXPLOSIONS[randi_range(0,GLOBALS.EXPLOSIONS.size()-1)].instantiate())
 	GLOBALS.EXPLODE_EFFECT(self.global_position, true)
 	GLOBALS.UPDATE_SCORE(score)
+	
+	GLOBALS.ADD_KILLS(enemy_type)
 	
 	if explode_with_passion:
 		for n in range(number_of_people_range.y):

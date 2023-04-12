@@ -81,8 +81,8 @@ func Count_Centipede_Size():
 		
 	Centipede_Parents.sort_custom(func(a, b): return a[1] > b[1])
 	
-	if Centipede_Parents[0][0].is_parent:
-		return
+	#if Centipede_Parents[0][0].is_parent:
+	#	return
 	
 	##NEW PARENTS PAST THIS POINT##
 	

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://cb43f81ox2b23"]
+[gd_scene load_steps=10 format=3 uid="uid://c47jaqce7leio"]
 
 [ext_resource type="Script" path="res://Scripts/Centipede_Controls.gd" id="1_wyluf"]
 [ext_resource type="Shader" path="res://scenes/Dissolve.gdshader" id="2_a833f"]
@@ -88,7 +88,6 @@ script = ExtResource("1_wyluf")
 shape = SubResource("CircleShape2D_60olk")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-self_modulate = Color(0.423529, 0, 0.423529, 1)
 texture_filter = 1
 material = SubResource("ShaderMaterial_idcvn")
 position = Vector2(3.57628e-07, -4.76837e-07)

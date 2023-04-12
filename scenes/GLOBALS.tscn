@@ -1,6 +1,14 @@
-[gd_scene load_steps=2 format=3 uid="uid://df4gptturqbhb"]
+[gd_scene load_steps=4 format=3 uid="uid://df4gptturqbhb"]
 
 [ext_resource type="Script" path="res://Scripts/GLOBALS.gd" id="1_fdli7"]
+[ext_resource type="Shader" path="res://scenes/Sprite_Asset.gdshader" id="2_hfthd"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yavgv"]
+shader = ExtResource("2_hfthd")
+shader_parameter/color_tint = Color(1, 1, 1, 1)
 
 [node name="GLOBALS" type="Node"]
 script = ExtResource("1_fdli7")
+
+[node name="Material_0" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_yavgv")

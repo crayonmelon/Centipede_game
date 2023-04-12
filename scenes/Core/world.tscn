@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://8gww200imsw4"]
+[gd_scene load_steps=20 format=3 uid="uid://8gww200imsw4"]
 
 [ext_resource type="Script" path="res://Scripts/Centipede_Parent.gd" id="1_hxdub"]
 [ext_resource type="Script" path="res://LEVEL_MANAGER.gd" id="1_rrlbx"]
@@ -10,7 +10,23 @@
 [ext_resource type="Texture2D" uid="uid://dt2yx1snpv2k0" path="res://icon.svg" id="6_ud3w4"]
 [ext_resource type="Script" path="res://Scripts/CameraFollow.gd" id="6_x07qx"]
 [ext_resource type="Script" path="res://score_check.gd" id="8_ftavh"]
-[ext_resource type="PackedScene" uid="uid://b2ptabhsfdaap" path="res://scenes/Enemies/Enemy_Bus.tscn" id="12_c8yn6"]
+[ext_resource type="PackedScene" uid="uid://cqoyb7upvuo1i" path="res://scenes/Enemies/Enemy_Heli.tscn" id="12_7o37w"]
+[ext_resource type="PackedScene" uid="uid://b58bwfue3m0gg" path="res://scenes/Enemies/Enemy_Bus.tscn" id="12_c8yn6"]
+
+[sub_resource type="Animation" id="Animation_h4j57"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
 
 [sub_resource type="Animation" id="Animation_yut0r"]
 resource_name = "Shake"
@@ -28,7 +44,13 @@ tracks/0/keys = {
 "values": [Vector2(0, 0), Vector2(1, 1), Vector2(0, 0), Vector2(-1, -1), Vector2(0, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_h4j57"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_sfev4"]
+_data = {
+"RESET": SubResource("Animation_h4j57"),
+"Shake": SubResource("Animation_yut0r")
+}
+
+[sub_resource type="Animation" id="Animation_r40ha"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -40,13 +62,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(0, 0)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_sfev4"]
-_data = {
-"RESET": SubResource("Animation_h4j57"),
-"Shake": SubResource("Animation_yut0r")
+"values": [Vector2(0, 18)]
 }
 
 [sub_resource type="Animation" id="Animation_esfug"]
@@ -63,21 +79,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [Vector2(0, 18), Vector2(1, 19), Vector2(0, 18), Vector2(-1, 17), Vector2(0, 18), Vector2(1, 19), Vector2(0, 18), Vector2(-1, 17), Vector2(0, 18), Vector2(1, 19), Vector2(0, 18), Vector2(-1, 17), Vector2(0, 18), Vector2(1, 19), Vector2(0, 18), Vector2(-1, 17), Vector2(0, 18)]
-}
-
-[sub_resource type="Animation" id="Animation_r40ha"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, 18)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_mb8sp"]
@@ -178,5 +179,8 @@ wait_time = 5.0
 
 [node name="Bus" parent="." instance=ExtResource("12_c8yn6")]
 position = Vector2(273, 55)
+
+[node name="Enemy" parent="." instance=ExtResource("12_7o37w")]
+position = Vector2(62, -63)
 
 [connection signal="timeout" from="SCORE_CONTROLLER/text_scroll/Timer" to="SCORE_CONTROLLER/text_scroll" method="_on_timer_timeout"]
