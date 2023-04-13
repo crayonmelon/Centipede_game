@@ -3,6 +3,7 @@ extends Node
 
 @export var C_CONTROLS = [["1_left", "1_right"]]
 @export var C_COLOURS = [Color("FFFFFF"), Color("00FFFF"), Color("FF00FF"), Color("FFFF00")]
+
 @export var CAMERA_TRACK = []
 @export var CENTIPEDE_PARENTS = []
 @export var WORLD_BORDER_X_MIN = -300

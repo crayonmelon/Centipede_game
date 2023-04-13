@@ -1,7 +1,8 @@
-[gd_scene load_steps=12 format=3 uid="uid://qduk7grj1t4s"]
+[gd_scene load_steps=13 format=3 uid="uid://qduk7grj1t4s"]
 
 [ext_resource type="Script" path="res://Scripts/civilian.gd" id="1_dkwm3"]
 [ext_resource type="Texture2D" uid="uid://do2dt0fouem4c" path="res://Sprite/civilian.png" id="2_53oat"]
+[ext_resource type="Material" uid="uid://cm53sf8vq5c3l" path="res://Shader/Civillian.tres" id="2_tsfor"]
 [ext_resource type="AudioStream" uid="uid://bd650ec6y8sto" path="res://Audio/Scream/screams_1.ogg" id="3_0vsxb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5xh4m"]
@@ -208,6 +209,7 @@ shape = SubResource("RectangleShape2D_5xh4m")
 
 [node name="civ" type="Sprite2D" parent="."]
 texture_filter = 1
+material = ExtResource("2_tsfor")
 texture = ExtResource("2_53oat")
 offset = Vector2(0, -2)
 hframes = 4
@@ -221,6 +223,7 @@ libraries = {
 [node name="ScreamPlayer" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_0vsxb")
 volume_db = -25.0
+bus = &"Screams"
 
 [node name="DiggingParticle" type="CPUParticles2D" parent="."]
 emitting = false

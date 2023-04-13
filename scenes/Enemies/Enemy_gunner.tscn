@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://dp5wu3ahqy8nd"]
+[gd_scene load_steps=9 format=3 uid="uid://dp5wu3ahqy8nd"]
 
 [ext_resource type="Script" path="res://scenes/Walk_To_Player.gd" id="1_70asu"]
 [ext_resource type="Texture2D" uid="uid://x34cgynde6m8" path="res://Sprite/WhiteSquare.png" id="2_0235h"]
 [ext_resource type="Script" path="res://Scripts/Gun.gd" id="3_cuhmo"]
+[ext_resource type="Material" uid="uid://d3xk2h46745se" path="res://Shader/Enemies_color.tres" id="4_fok7g"]
 [ext_resource type="AudioStream" uid="uid://bavayhukohdw3" path="res://Audio/Effects/gun_shot.ogg" id="4_nnlk7"]
 
 [sub_resource type="Shader" id="Shader_wb24b"]
@@ -27,6 +28,7 @@ enemy_type = 3
 shape = SubResource("RectangleShape2D_tvjkg")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+material = ExtResource("4_fok7g")
 position = Vector2(2.98023e-08, 0)
 scale = Vector2(0.5, 1)
 texture = ExtResource("2_0235h")
@@ -44,8 +46,10 @@ wait_time = 3.0
 autostart = true
 
 [node name="GunSound" type="AudioStreamPlayer2D" parent="Gun"]
+material = ExtResource("4_fok7g")
 stream = ExtResource("4_nnlk7")
 max_distance = 200.0
+bus = &"Vehicle"
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="timeout" from="Gun/Timer" to="." method="_on_timer_timeout"]

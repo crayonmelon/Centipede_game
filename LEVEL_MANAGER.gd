@@ -7,15 +7,16 @@ extends Node
 enum DIR {NORTH, SOUTH, EAST, WEST, NONE}
 
 var WAVE = 0
-var WAVES_GOALS = ["CARNAGE", "DESTROY 10 TANKS", "BEES?!"]
+var WAVES_GOALS = ["CARNAGE", "DESTROY 10 TANKS", "DESTROY THE HELICOPTER", "BEES?!"]
 
 var warning_system = preload("res://scenes/warningsytem.tscn")
 
 var enemy_fella = preload("res://scenes/Enemies/Enemy_gunner.tscn")
 var enemy_tank = preload("res://scenes/Enemies/Tank.tscn")
 var enemy_bus = preload("res://scenes/Enemies/Enemy_Bus.tscn")
+var enemy_heli = preload("res://scenes/Enemies/Enemy_Heli.tscn")
 
-var enemy_collection = [[enemy_fella, 5, DIR.NONE], [enemy_tank, 15, DIR.NONE], [enemy_bus, 25, DIR.EAST]]
+var enemy_collection = [[enemy_fella, 5, DIR.NONE], [enemy_tank, 15, DIR.NONE], [enemy_bus, 25, DIR.EAST], [enemy_heli, 50, DIR.WEST]]
 
 var current_angery = 1
 var current_score = 0
@@ -28,14 +29,13 @@ var budget = 0
 func _ready():
 	DisplayServer.window_set_size(Vector2(958, 720))
 	
-	GLOBALS.CHANGE_COLOUR(Color.CYAN)
-
 func _process(delta):
 	
 	# Task text 
+	
 	if WAVE == 1:
 		$SCORE_CONTROLLER/angery_meter.text = "TASK: " + " DESTROY " + str(5 - (GLOBALS.FIND_KILLS(GLOBALS.Enemy_Type.TANK) ) ) + " Tanks"
-		
+
 
 func Wave_Update(val):
 	
@@ -64,6 +64,8 @@ func WAVE_SPAWN():
 			Wave_Change(2)
 		
 	elif WAVE == 2:
+		if GLOBALS.FIND_KILLS(GLOBALS.Enemy_Type.HELICOPTER) >= 1: 
+			Wave_Change(3)
 		Enemy_Spawner([enemy_collection[2]])
 	pass
 
@@ -72,7 +74,6 @@ func increase_score(val):
 	budget += val * current_angery
 	Wave_Update(current_score)
 	score_controller.increase_score(current_score)
-
 
 func tank_count():
 	pass

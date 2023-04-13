@@ -41,7 +41,7 @@ func die():
 func _on_timer_timeout():
 	var missile_inst = missile.instantiate()
 	missile_inst.position = global_position
-	missile_inst.rotation = -15
+	missile_inst.fall_left = going_left
 	
 	get_tree().get_root().add_child(missile_inst)
 	

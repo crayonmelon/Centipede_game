@@ -1,0 +1,8 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://cm53sf8vq5c3l"]
+
+[ext_resource type="Shader" path="res://scenes/Sprite_Asset.gdshader" id="1_2smsx"]
+
+[resource]
+shader = ExtResource("1_2smsx")
+shader_parameter/color_tint = Color(0.627451, 0.235294, 0.533333, 1)
+shader_parameter/offset = 1.0

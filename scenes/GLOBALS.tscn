@@ -1,14 +1,25 @@
-[gd_scene load_steps=4 format=3 uid="uid://df4gptturqbhb"]
+[gd_scene load_steps=6 format=3 uid="uid://df4gptturqbhb"]
 
 [ext_resource type="Script" path="res://Scripts/GLOBALS.gd" id="1_fdli7"]
 [ext_resource type="Shader" path="res://scenes/Sprite_Asset.gdshader" id="2_hfthd"]
+[ext_resource type="Material" uid="uid://cm53sf8vq5c3l" path="res://Shader/Civillian.tres" id="3_nbgl0"]
+[ext_resource type="Material" uid="uid://d3xk2h46745se" path="res://Shader/Enemies_color.tres" id="3_vb3hx"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_yavgv"]
 shader = ExtResource("2_hfthd")
-shader_parameter/color_tint = Color(1, 1, 1, 1)
+shader_parameter/color_tint = Color(0.862745, 0.862745, 0.862745, 1)
 
 [node name="GLOBALS" type="Node"]
 script = ExtResource("1_fdli7")
 
-[node name="Material_0" type="Sprite2D" parent="."]
+[node name="BUILDINGS" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_yavgv")
+
+[node name="CIVILLIANS" type="Sprite2D" parent="."]
+material = ExtResource("3_nbgl0")
+
+[node name="ENEMIES" type="Sprite2D" parent="."]
+material = ExtResource("3_vb3hx")
+
+[node name="BACKGROUND" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_yavgv")

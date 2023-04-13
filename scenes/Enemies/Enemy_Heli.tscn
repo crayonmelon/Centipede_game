@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://cqoyb7upvuo1i"]
+[gd_scene load_steps=11 format=3 uid="uid://cqoyb7upvuo1i"]
 
 [ext_resource type="Script" path="res://scenes/Enemies/HeliMovement.gd" id="1_bdbgh"]
 [ext_resource type="Texture2D" uid="uid://bgyy7q1bbn8vm" path="res://Sprite/plane.png" id="2_8nstd"]
+[ext_resource type="Material" uid="uid://d3xk2h46745se" path="res://Shader/Enemies_color.tres" id="3_8vjsd"]
 [ext_resource type="AudioStream" uid="uid://dgiut1m1q30ih" path="res://Audio/Effects/helicopter.ogg" id="3_se4h3"]
 
 [sub_resource type="Shader" id="Shader_wb24b"]
@@ -65,6 +66,7 @@ shape = SubResource("RectangleShape2D_3r3o2")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
+material = ExtResource("3_8vjsd")
 position = Vector2(2.98023e-08, 0)
 texture = ExtResource("2_8nstd")
 hframes = 2
@@ -77,8 +79,11 @@ libraries = {
 }
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+material = ExtResource("3_8vjsd")
 stream = ExtResource("3_se4h3")
 autoplay = true
+max_distance = 300.0
+bus = &"Vehicle"
 
 [node name="Timer" type="Timer" parent="."]
 autostart = true
