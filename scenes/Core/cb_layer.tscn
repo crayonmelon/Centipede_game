@@ -1,6 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://cry8rgtu0cdxa"]
+[gd_scene load_steps=3 format=3 uid="uid://c4be73i3rroh3"]
 
-[ext_resource type="Material" uid="uid://jh2tt5jpaktq" path="res://scenes/Core/CHROMATIC_AB.tres" id="1_fnlpe"]
+[ext_resource type="Material" path="res://Shader/CHROMATIC_AB.tres" id="1_3o0s0"]
 [ext_resource type="Texture2D" uid="uid://x34cgynde6m8" path="res://Sprite/WhiteSquare.png" id="2_a1jvv"]
 
 [node name="CB_LAYER" type="CanvasLayer"]
@@ -9,7 +9,7 @@ layer = 10
 [node name="CanvasModulate" type="Sprite2D" parent="."]
 z_index = 20
 texture_filter = 1
-material = ExtResource("1_fnlpe")
+material = ExtResource("1_3o0s0")
 position = Vector2(243, 243)
 scale = Vector2(122.5, 122.5)
 texture = ExtResource("2_a1jvv")

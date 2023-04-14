@@ -7,11 +7,13 @@ var max_size = false
 var target = Vector2(0,0)
 
 func _process(delta):
+	if GLOBALS.CAMERA_TRACK.size() <= 0:
+		return
 	camera_pos()
 	camera_scale(delta)
 
 func camera_pos():
-	
+
 	# MidPoint Formula
 	var x_vals = 0 
 	var y_vals = 0
@@ -26,7 +28,6 @@ func camera_pos():
 #		midPoint = Vector2(0,0)
 		
 	target = GLOBALS.CAMERA_TRACK[0].position
-	
 	global_position = global_position.lerp(target,.1)
 
 func camera_scale(delta):

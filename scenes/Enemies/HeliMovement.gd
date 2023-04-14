@@ -1,7 +1,7 @@
-extends StaticBody2D
+extends Area2D
 
 var speed = 80
-var score = 10
+var score = 100
 
 var civ = preload("res://scenes/collateral/civilian.tscn")
 var boom_sound = preload("res://Audio/Explosion/carcrash.ogg")
@@ -35,9 +35,6 @@ func Flip():
 	
 	position = Vector2(position.x, randi_range(GLOBALS.WORLD_BORDER_Y_MIN, GLOBALS.WORLD_BORDER_Y_MAX))
 
-func die():
-	print("piss")
-
 func _on_timer_timeout():
 	var missile_inst = missile.instantiate()
 	missile_inst.position = global_position
@@ -45,3 +42,19 @@ func _on_timer_timeout():
 	
 	get_tree().get_root().add_child(missile_inst)
 	
+func _on_body_entered(body):
+	$CollisionShape2D.disabled = true
+	
+	GLOBALS.EXPLODE_EFFECT(self.global_position)
+	GLOBALS.PLAY_BOOM(self.global_position, boom_sound)
+	GLOBALS.ADD_KILLS(GLOBALS.Enemy_Type.HELICOPTER)
+	GLOBALS.UPDATE_SCORE(score)
+	
+	for n in range(3):
+		var people = civ.instantiate()
+		people.position = global_position
+		people.run = true
+		get_tree().get_root().add_child(people)
+	
+	queue_free()
+

@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Centipede_Revenge"
-run/main_scene="res://scenes/Core/world.tscn"
+run/main_scene="res://scenes/Core/Main_Menu.tscn"
 config/features=PackedStringArray("4.0", "GL Compatibility")
 config/icon="res://icon.svg"
 
@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 GLOBALS="*res://scenes/GLOBALS.tscn"
 CbLayer="*res://scenes/Core/cb_layer.tscn"
+TRANSITION="*res://scenes/Core/Transition.tscn"
 
 [display]
 

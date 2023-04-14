@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://8gww200imsw4"]
+[gd_scene load_steps=19 format=3 uid="uid://dg885qbu0as2t"]
 
 [ext_resource type="Script" path="res://Scripts/Centipede_Parent.gd" id="1_hxdub"]
 [ext_resource type="Script" path="res://LEVEL_MANAGER.gd" id="1_rrlbx"]
@@ -10,8 +10,6 @@
 [ext_resource type="Texture2D" uid="uid://dt2yx1snpv2k0" path="res://icon.svg" id="6_ud3w4"]
 [ext_resource type="Script" path="res://Scripts/CameraFollow.gd" id="6_x07qx"]
 [ext_resource type="Script" path="res://score_check.gd" id="8_ftavh"]
-[ext_resource type="AudioStream" uid="uid://jjw7vmisq24f" path="res://Audio/Music/__ Forked.mp3" id="13_3j3hw"]
-[ext_resource type="Script" path="res://scenes/Core/MusicManager.gd" id="13_rg5xg"]
 
 [sub_resource type="Animation" id="Animation_h4j57"]
 length = 0.001
@@ -121,6 +119,18 @@ libraries = {
 "": SubResource("AnimationLibrary_sfev4")
 }
 
+[node name="centipede_parts" type="Label" parent="SCORE_CONTROLLER"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -118.0
+offset_bottom = 20.0
+grow_horizontal = 0
+size_flags_horizontal = 8
+theme_override_fonts/font = ExtResource("6_m1u4s")
+text = "50/50"
+horizontal_alignment = 2
+
 [node name="angery_meter" type="Label" parent="SCORE_CONTROLLER"]
 offset_top = 18.0
 offset_right = 479.0
@@ -179,13 +189,5 @@ script = ExtResource("6_x07qx")
 
 [node name="SpawnEnemy" type="Timer" parent="."]
 wait_time = 5.0
-
-[node name="MusicManager" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("13_3j3hw")
-volume_db = -80.0
-pitch_scale = 0.5
-autoplay = true
-bus = &"Music"
-script = ExtResource("13_rg5xg")
 
 [connection signal="timeout" from="SCORE_CONTROLLER/text_scroll/Timer" to="SCORE_CONTROLLER/text_scroll" method="_on_timer_timeout"]

@@ -22,7 +22,6 @@ var follow_target = Vector2(0,0)
 @export var use_custom_screen_wrap = false
 var custom_screen_wrap_val : Vector4 = Vector4i(0,480,0,480)
 
-
 func _parent_move():
 	rotation_direction = Input.get_axis(GLOBALS.C_CONTROLS[controls_val][0], GLOBALS.C_CONTROLS[controls_val][1]) * turn_speed
 	velocity = transform.x * (speed + (100 if Input.is_action_pressed("1_faster") else 0) * 0 if !started_tunneling else 1)

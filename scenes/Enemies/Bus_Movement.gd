@@ -16,7 +16,7 @@ func die():
 	
 	GLOBALS.EXPLODE_EFFECT(self.global_position)
 	GLOBALS.PLAY_BOOM(self.global_position, boom_sound)
-	
+	GLOBALS.ADD_KILLS(GLOBALS.Enemy_Type.BUS)
 	GLOBALS.UPDATE_SCORE(score)
 	
 	for n in range(20):

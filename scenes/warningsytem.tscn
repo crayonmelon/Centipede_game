@@ -1,8 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://cgymtpl2jyxjj"]
+[gd_scene load_steps=5 format=3]
 
 [ext_resource type="FontFile" uid="uid://br7gfki6pqkqu" path="res://Font/AtariClassicChunky.ttf" id="1_htkyl"]
 [ext_resource type="Texture2D" uid="uid://x34cgynde6m8" path="res://Sprite/WhiteSquare.png" id="2_kyvxo"]
-[ext_resource type="Script" path="res://scenes/Core/WaveUpdate.gd" id="2_oh8pw"]
+[ext_resource type="Script" path="res://Scripts/WaveUpdate.gd" id="2_oh8pw"]
 [ext_resource type="AudioStream" uid="uid://0nkjiha7wbvq" path="res://Audio/Explosion/warning.ogg" id="4_0ppy4"]
 
 [node name="WARNINGSYTEM" type="CanvasLayer"]

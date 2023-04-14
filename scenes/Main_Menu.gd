@@ -1,18 +1,11 @@
 extends CanvasLayer
 
-var main_game = preload("res://scenes/Core/world.tscn")
-
-func _ready():
-	pass
-
-
-func _process(delta):
-	pass
-
+var main_game = "res://scenes/Core/world.tscn"
 
 func _on_start_pressed():
-	#reset 
-	GLOBALS.CAMERA_TRACK = []
 	
-	get_tree().change_scene_to_packed(main_game)
-	
+	GLOBALS.Reset()
+	TRANSITION.Transistion_Intro(main_game, self)
+
+func _on_settings_pressed():
+	get_tree().get_root().add_child(preload("res://scenes/Core/Pause_Menu.tscn").instantiate())

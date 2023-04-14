@@ -2,10 +2,12 @@ extends Node
 # C = CENTIPEDE
 
 @export var C_CONTROLS = [["1_left", "1_right"]]
-@export var C_COLOURS = [Color("FFFFFF"), Color("00FFFF"), Color("FF00FF"), Color("FFFF00")]
+@export var C_COLOURS = [Color("B03C3C"), Color("00FFFF"), Color("FF00FF"), Color("FFFF00")]
 
 @export var CAMERA_TRACK = []
 @export var CENTIPEDE_PARENTS = []
+var CENTIPEPE_PARTS = []
+
 @export var WORLD_BORDER_X_MIN = -300
 @export var WORLD_BORDER_X_MAX = 300
 
@@ -18,12 +20,17 @@ extends Node
 var Audio_node = preload("res://scenes/explosions/Audio.tscn")
 var EDGING = false
 
+
 func _ready():
 	DisplayServer.window_set_size(Vector2(958, 720))
 
 func UPDATE_SCORE(val):
 	get_tree().get_root().get_node("LEVEL_MANAGER").increase_score(val)
 	
+func UPDATE_TEXT():
+	get_tree().get_root().get_node("LEVEL_MANAGER/SCORE_CONTROLLER").update_health()
+	
+
 func EXPLODE_EFFECT(pos, sound = false):
 	var explode = EXPLOSIONS[randi_range(0,GLOBALS.EXPLOSIONS.size()-1)].instantiate()
 	explode.position = pos
@@ -60,8 +67,12 @@ func CHANGE_COLOUR(colour):
 	Colour_Material_O.set("shader_parameter/color_tint", colour)
 
 func Reset():
-	pass
+	CENTIPEPE_PARTS = []
+	CENTIPEDE_PARENTS = []
+	CAMERA_TRACK = []
+	ENEMY_KILLS = {Enemy_Type.BUILDING: 0, Enemy_Type.CIVILIAN: 0, Enemy_Type.TANK:0, Enemy_Type.GUNNER:0, Enemy_Type.BUS: 0, Enemy_Type.HELICOPTER: 0}
 
+	
 func _process(delta):
 	if Input.is_action_just_pressed("PAUSE"):
 		get_tree().get_root().add_child(preload("res://scenes/Core/Pause_Menu.tscn").instantiate())

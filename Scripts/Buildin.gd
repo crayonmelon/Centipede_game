@@ -17,7 +17,7 @@ func _on_body_entered(body):
 		_spawn_people()
 		$CollisionShape2D.queue_free()
 		GLOBALS.UPDATE_SCORE(10)
-		
+		GLOBALS.ADD_KILLS(GLOBALS.Enemy_Type.BUILDING)
 		$AudioStreamPlayer2D.stream = explosions[randi_range(0, explosions.size()-1)]
 		$AudioStreamPlayer2D.play()
 		

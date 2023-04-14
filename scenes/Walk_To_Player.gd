@@ -1,6 +1,6 @@
 extends Node2D
 
-@export var enemy_type = GLOBALS.Enemy_Type.TANK
+var enemy_type = GLOBALS.Enemy_Type.TANK
 
 @export var score = 10
 @export var explode_with_passion = false
@@ -34,7 +34,6 @@ func Walk_To_player():
 
 func _on_timer_timeout():
 	Walk_To_player()
-
 
 func _on_body_entered(body):
 	add_child(GLOBALS.EXPLOSIONS[randi_range(0,GLOBALS.EXPLOSIONS.size()-1)].instantiate())

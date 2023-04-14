@@ -7,7 +7,7 @@ extends Node
 enum DIR {NORTH, SOUTH, EAST, WEST, NONE}
 
 var WAVE = 0
-var WAVES_GOALS = ["CARNAGE", "DESTROY 10 TANKS", "DESTROY THE HELICOPTER", "BEES?!"]
+var WAVES_GOALS = ["CARNAGE", "DESTROY 10 TANKS", "DESTROY THE HELICOPTER", "BEES?!", "god has left us"]
 
 var warning_system = preload("res://scenes/warningsytem.tscn")
 
@@ -16,7 +16,7 @@ var enemy_tank = preload("res://scenes/Enemies/Tank.tscn")
 var enemy_bus = preload("res://scenes/Enemies/Enemy_Bus.tscn")
 var enemy_heli = preload("res://scenes/Enemies/Enemy_Heli.tscn")
 
-var enemy_collection = [[enemy_fella, 5, DIR.NONE], [enemy_tank, 15, DIR.NONE], [enemy_bus, 25, DIR.EAST], [enemy_heli, 50, DIR.WEST]]
+var enemy_collection = [[enemy_fella, 5, DIR.NONE], [enemy_tank, 15, DIR.NONE], [enemy_bus, 25, DIR.EAST], [enemy_heli, 50, DIR.NONE]]
 
 var current_angery = 1
 var current_score = 0
@@ -25,7 +25,6 @@ var difficulty = 0
 var started = false
 
 var budget = 0
-
 	
 func _process(delta):
 	
@@ -33,16 +32,19 @@ func _process(delta):
 	
 	if WAVE == 1:
 		$SCORE_CONTROLLER/angery_meter.text = "TASK: " + " DESTROY " + str(5 - (GLOBALS.FIND_KILLS(GLOBALS.Enemy_Type.TANK) ) ) + " Tanks"
-	elif WAVE == 2:
+	elif WAVE == 2: 
+		$SCORE_CONTROLLER/angery_meter.text = "TASK: " + " CAUSE " + str(3 - (GLOBALS.FIND_KILLS(GLOBALS.Enemy_Type.BUS) ) ) + " BUS CRASHES"
+	elif WAVE == 3:
 		$SCORE_CONTROLLER/angery_meter.text = "TASK: " + " DESTROY " + str(3 - (GLOBALS.FIND_KILLS(GLOBALS.Enemy_Type.HELICOPTER) ) ) + " HELICOPTER"
-
+	elif  WAVE == 4:
+		$SCORE_CONTROLLER/angery_meter.text = "CIVILIANS KILLED: " + str((GLOBALS.FIND_KILLS(GLOBALS.Enemy_Type.CIVILIAN) ) )
+	
 func Wave_Update(val):
 	
 	if current_score > 100 and WAVE <= 0:
 		Wave_Change(1)
 	
-	
-	
+
 func Wave_Change(wave_val):
 	WAVE = wave_val
 	
@@ -58,7 +60,9 @@ func Wave_Change(wave_val):
 
 func Spawning():
 	if WAVE == 2:
-		Spawn_Stuff(enemy_collection[3][0], 3)
+		Spawn_Stuff(enemy_collection[2][0], 1)
+	elif WAVE == 3:
+		Spawn_Stuff(enemy_collection[3][0], 1)
 
 func WAVE_SPAWN():
 	
@@ -69,9 +73,17 @@ func WAVE_SPAWN():
 			Wave_Change(2)
 		
 	elif WAVE == 2:
-		if GLOBALS.FIND_KILLS(GLOBALS.Enemy_Type.HELICOPTER) >= 1: 
+		if GLOBALS.FIND_KILLS(GLOBALS.Enemy_Type.BUS) >= 3: 
 			Wave_Change(3)
-		Enemy_Spawner([enemy_collection[2]])
+		Enemy_Spawner([enemy_collection[0],enemy_collection[1], enemy_collection[2]])
+	
+	elif WAVE == 3:
+		if GLOBALS.FIND_KILLS(GLOBALS.Enemy_Type.HELICOPTER) >= 3: 
+			Wave_Change(4)
+		Enemy_Spawner([enemy_collection[3]])
+	
+	elif WAVE == 4:
+		Enemy_Spawner([enemy_collection[0],enemy_collection[1], enemy_collection[2], enemy_collection[3]])
 	pass
 
 func increase_score(val):
@@ -133,3 +145,7 @@ func rand_outside_border(direction = DIR.NONE):
 		
 	else:
 		return Vector2(0,0)
+
+
+func Kill_urself():
+	TRANSITION.Change_Scene("res://scenes/Core/Game_Over.tscn",self)

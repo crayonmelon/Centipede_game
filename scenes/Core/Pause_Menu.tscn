@@ -1,11 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://dglqeppi2v2ml"]
+[gd_scene load_steps=8 format=3 uid="uid://ccsv3l16rwikk"]
 
-[ext_resource type="Script" path="res://scenes/Core/PauseCode.gd" id="1_hkhcs"]
+[ext_resource type="Script" path="res://Scripts/PauseCode.gd" id="1_e83uo"]
 [ext_resource type="FontFile" uid="uid://br7gfki6pqkqu" path="res://Font/AtariClassicChunky.ttf" id="2_0khgw"]
 [ext_resource type="Texture2D" uid="uid://x34cgynde6m8" path="res://Sprite/WhiteSquare.png" id="2_66o20"]
 [ext_resource type="Shader" path="res://EarthBound.gdshader" id="2_hf7ij"]
 [ext_resource type="Texture2D" uid="uid://dt2yx1snpv2k0" path="res://icon.svg" id="3_sxxjm"]
-[ext_resource type="Material" uid="uid://jh2tt5jpaktq" path="res://scenes/Core/CHROMATIC_AB.tres" id="6_f0q0p"]
+[ext_resource type="Material" path="res://Shader/CHROMATIC_AB.tres" id="6_8eucm"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_vgrg6"]
 shader = ExtResource("2_hf7ij")
@@ -25,7 +25,7 @@ shader_parameter/palette = ExtResource("3_sxxjm")
 [node name="Pause_MEnu" type="CanvasLayer"]
 process_mode = 2
 layer = 5
-script = ExtResource("1_hkhcs")
+script = ExtResource("1_e83uo")
 
 [node name="Background_Background" type="Sprite2D" parent="."]
 process_mode = 3
@@ -76,7 +76,7 @@ grow_vertical = 2
 [node name="CanvasModulate" type="Sprite2D" parent="Chromatic_ab/HSlider"]
 z_index = 20
 texture_filter = 1
-material = ExtResource("6_f0q0p")
+material = ExtResource("6_8eucm")
 position = Vector2(11, 97)
 scale = Vector2(8.75, 9.75)
 texture = ExtResource("2_66o20")
@@ -116,5 +116,21 @@ button_mask = 5
 text = "RESET"
 metadata/_edit_use_anchors_ = true
 
+[node name="SETTINGS" type="Button" parent="."]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -136.0
+offset_top = -24.0
+grow_horizontal = 0
+grow_vertical = 0
+size_flags_vertical = 6
+theme_override_fonts/font = ExtResource("2_0khgw")
+button_mask = 5
+text = "CLOSE"
+
 [connection signal="value_changed" from="Chromatic_ab/HSlider" to="." method="_on_h_slider_value_changed"]
 [connection signal="pressed" from="Chromatic_ab/Reset" to="." method="_on_reset_pressed"]
+[connection signal="pressed" from="SETTINGS" to="." method="_on_settings_pressed"]

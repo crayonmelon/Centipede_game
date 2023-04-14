@@ -8,6 +8,11 @@
 layer = 0
 script = ExtResource("1_gukwh")
 
+[node name="Centipede" type="Node2D" parent="."]
+position = Vector2(0, 20)
+script = ExtResource("3_nxtq0")
+is_menu = true
+
 [node name="START" type="Button" parent="."]
 anchors_preset = 7
 anchor_left = 0.5
@@ -24,6 +29,21 @@ size_flags_vertical = 6
 theme_override_fonts/font = ExtResource("2_b6djx")
 button_mask = 5
 text = "START"
+
+[node name="SETTINGS" type="Button" parent="."]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -136.0
+offset_top = -24.0
+grow_horizontal = 0
+grow_vertical = 0
+size_flags_vertical = 6
+theme_override_fonts/font = ExtResource("2_b6djx")
+button_mask = 5
+text = "SETTINGS"
 
 [node name="Title" type="Label" parent="."]
 texture_filter = 1
@@ -63,11 +83,9 @@ grow_vertical = 2
 theme_override_fonts/font = ExtResource("2_b6djx")
 text = "CONTROLS:
 A/D - MOVE
-SPACE - DIG"
+SPACE - DIG
+p/ESC - PAUSE"
 horizontal_alignment = 1
 
-[node name="Centipede" type="Node2D" parent="."]
-script = ExtResource("3_nxtq0")
-is_menu = true
-
 [connection signal="pressed" from="START" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="SETTINGS" to="." method="_on_settings_pressed"]

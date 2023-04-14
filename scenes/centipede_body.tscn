@@ -11,7 +11,7 @@ radius = 4.0
 resource_local_to_scene = true
 shader = ExtResource("2_a833f")
 shader_parameter/sensitivity = 0.0
-shader_parameter/color_tint = Color(1, 1, 1, 1)
+shader_parameter/color_tint = Color(0.690196, 0.235294, 0.235294, 1)
 
 [sub_resource type="Animation" id="Animation_1r87x"]
 length = 0.001

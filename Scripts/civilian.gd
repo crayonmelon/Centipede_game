@@ -27,6 +27,7 @@ func _on_body_entered(body):
 	if !invisible:
 		$CollisionShape2D.queue_free()
 		GLOBALS.UPDATE_SCORE(1)
+		GLOBALS.ADD_KILLS(GLOBALS.Enemy_Type.CIVILIAN)
 		_random_death()
 		
 
