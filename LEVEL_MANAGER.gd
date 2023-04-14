@@ -26,8 +26,6 @@ var started = false
 
 var budget = 0
 
-func _ready():
-	DisplayServer.window_set_size(Vector2(958, 720))
 	
 func _process(delta):
 	
@@ -35,15 +33,16 @@ func _process(delta):
 	
 	if WAVE == 1:
 		$SCORE_CONTROLLER/angery_meter.text = "TASK: " + " DESTROY " + str(5 - (GLOBALS.FIND_KILLS(GLOBALS.Enemy_Type.TANK) ) ) + " Tanks"
-
+	elif WAVE == 2:
+		$SCORE_CONTROLLER/angery_meter.text = "TASK: " + " DESTROY " + str(3 - (GLOBALS.FIND_KILLS(GLOBALS.Enemy_Type.HELICOPTER) ) ) + " HELICOPTER"
 
 func Wave_Update(val):
 	
 	if current_score > 100 and WAVE <= 0:
 		Wave_Change(1)
-	elif current_score > 1000 and WAVE <= 1:
-		Wave_Change(2)
-		
+	
+	
+	
 func Wave_Change(wave_val):
 	WAVE = wave_val
 	
@@ -53,7 +52,13 @@ func Wave_Change(wave_val):
 	
 	$SCORE_CONTROLLER/angery_meter.text = "TASK: " + str(WAVES_GOALS[WAVE])
 	$SCORE_CONTROLLER/angery_meter/AnimationPlayer.play("Shake")
+	
+	Spawning()
 	WAVE_SPAWN()
+
+func Spawning():
+	if WAVE == 2:
+		Spawn_Stuff(enemy_collection[3][0], 3)
 
 func WAVE_SPAWN():
 	

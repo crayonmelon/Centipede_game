@@ -1,0 +1,120 @@
+[gd_scene load_steps=8 format=3 uid="uid://dglqeppi2v2ml"]
+
+[ext_resource type="Script" path="res://scenes/Core/PauseCode.gd" id="1_hkhcs"]
+[ext_resource type="FontFile" uid="uid://br7gfki6pqkqu" path="res://Font/AtariClassicChunky.ttf" id="2_0khgw"]
+[ext_resource type="Texture2D" uid="uid://x34cgynde6m8" path="res://Sprite/WhiteSquare.png" id="2_66o20"]
+[ext_resource type="Shader" path="res://EarthBound.gdshader" id="2_hf7ij"]
+[ext_resource type="Texture2D" uid="uid://dt2yx1snpv2k0" path="res://icon.svg" id="3_sxxjm"]
+[ext_resource type="Material" uid="uid://jh2tt5jpaktq" path="res://scenes/Core/CHROMATIC_AB.tres" id="6_f0q0p"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vgrg6"]
+shader = ExtResource("2_hf7ij")
+shader_parameter/screen_height = 640.0
+shader_parameter/amplitude = 0.2
+shader_parameter/frequency = 200.0
+shader_parameter/speed = 6.0
+shader_parameter/amplitude_vertical = 4.0
+shader_parameter/frequency_vertical = 4.0
+shader_parameter/speed_vertical = 4.0
+shader_parameter/scroll_direction = Vector2(6, 6)
+shader_parameter/scrolling_speed = 0.08
+shader_parameter/enable_palette_cycling = true
+shader_parameter/palette_speed = 0.456
+shader_parameter/palette = ExtResource("3_sxxjm")
+
+[node name="Pause_MEnu" type="CanvasLayer"]
+process_mode = 2
+layer = 5
+script = ExtResource("1_hkhcs")
+
+[node name="Background_Background" type="Sprite2D" parent="."]
+process_mode = 3
+material = SubResource("ShaderMaterial_vgrg6")
+position = Vector2(240.5, 239)
+scale = Vector2(120.25, 120.5)
+texture = ExtResource("2_66o20")
+
+[node name="Text_bg" type="Sprite2D" parent="."]
+modulate = Color(0.129412, 0.141176, 0.192157, 1)
+position = Vector2(240, 81)
+scale = Vector2(120.25, 4)
+texture = ExtResource("2_66o20")
+
+[node name="Title" type="Label" parent="."]
+process_mode = 3
+texture_filter = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -64.0
+offset_top = 70.0
+offset_right = 64.0
+offset_bottom = 89.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("2_0khgw")
+text = "PAUSED-ED"
+horizontal_alignment = 1
+
+[node name="Chromatic_ab" type="Node" parent="."]
+
+[node name="Text_bg" type="Sprite2D" parent="Chromatic_ab"]
+modulate = Color(0.129412, 0.141176, 0.192157, 1)
+position = Vector2(240.5, 148)
+scale = Vector2(120.25, 10)
+texture = ExtResource("2_66o20")
+
+[node name="HSlider" type="HSlider" parent="Chromatic_ab"]
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 12.0
+offset_top = -97.0
+offset_right = 321.0
+offset_bottom = -72.0
+grow_vertical = 2
+
+[node name="CanvasModulate" type="Sprite2D" parent="Chromatic_ab/HSlider"]
+z_index = 20
+texture_filter = 1
+material = ExtResource("6_f0q0p")
+position = Vector2(11, 97)
+scale = Vector2(8.75, 9.75)
+texture = ExtResource("2_66o20")
+
+[node name="CHROMATIC ABBERATION" type="Label" parent="Chromatic_ab"]
+process_mode = 3
+texture_filter = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 4.0
+offset_top = -115.0
+offset_right = 324.0
+offset_bottom = -96.0
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_0khgw")
+text = "CHROMATIC_ABBERATION"
+horizontal_alignment = 1
+
+[node name="Reset" type="Button" parent="Chromatic_ab"]
+process_mode = 3
+texture_filter = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 109.0
+offset_top = -358.0
+offset_right = 197.0
+offset_bottom = -334.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_vertical = 6
+theme_override_fonts/font = ExtResource("2_0khgw")
+button_mask = 5
+text = "RESET"
+metadata/_edit_use_anchors_ = true
+
+[connection signal="value_changed" from="Chromatic_ab/HSlider" to="." method="_on_h_slider_value_changed"]
+[connection signal="pressed" from="Chromatic_ab/Reset" to="." method="_on_reset_pressed"]

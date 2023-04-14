@@ -7,8 +7,10 @@ var parent = null
 var number_of_parts = 50
 var centipede_part = preload("res://scenes/centipede_body.tscn")
 
+
 @export var Icons: Array[RichTextLabel] = []
 
+@export var is_menu = false
 
 func _ready():
 
@@ -26,6 +28,7 @@ func New_Centipede():
 	Centipede_Parts[0].is_parent = true
 	GLOBALS.CAMERA_TRACK.append(Centipede_Parts[0])
 	GLOBALS.CAMERA_TRACK.append(Centipede_Parts[Centipede_Parts.size()-1])
+
 	
 	for i in len(Centipede_Parts):
 		if i == 0:
@@ -35,6 +38,10 @@ func New_Centipede():
 		unit.is_parent = false
 		unit.following = Centipede_Parts[i-1]
 
+	if is_menu:
+		for i in len(Centipede_Parts):
+			var unit = Centipede_Parts[i]
+			unit.use_custom_screen_wrap = true
 
 func Died(node):
 	var node_index = -1

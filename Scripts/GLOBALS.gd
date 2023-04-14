@@ -18,6 +18,9 @@ extends Node
 var Audio_node = preload("res://scenes/explosions/Audio.tscn")
 var EDGING = false
 
+func _ready():
+	DisplayServer.window_set_size(Vector2(958, 720))
+
 func UPDATE_SCORE(val):
 	get_tree().get_root().get_node("LEVEL_MANAGER").increase_score(val)
 	
@@ -55,3 +58,10 @@ var Colour_Material_O = preload("res://Shader/Colour_0_Material.tres")
 
 func CHANGE_COLOUR(colour):
 	Colour_Material_O.set("shader_parameter/color_tint", colour)
+
+func Reset():
+	pass
+
+func _process(delta):
+	if Input.is_action_just_pressed("PAUSE"):
+		get_tree().get_root().add_child(preload("res://scenes/Core/Pause_Menu.tscn").instantiate())

@@ -1,23 +1,73 @@
-[gd_scene load_steps=3 format=3 uid="uid://omkpbl3rkiu8"]
+[gd_scene load_steps=4 format=3 uid="uid://omkpbl3rkiu8"]
 
 [ext_resource type="Script" path="res://scenes/Main_Menu.gd" id="1_gukwh"]
 [ext_resource type="FontFile" uid="uid://br7gfki6pqkqu" path="res://Font/AtariClassicChunky.ttf" id="2_b6djx"]
+[ext_resource type="Script" path="res://Scripts/Centipede_Parent.gd" id="3_nxtq0"]
 
-[node name="Main_Menu" type="Node2D"]
+[node name="Main_Menu" type="CanvasLayer"]
+layer = 0
 script = ExtResource("1_gukwh")
 
 [node name="START" type="Button" parent="."]
-anchors_preset = 15
-anchor_right = 1.0
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = 202.0
-offset_top = 388.0
-offset_right = 258.0
-offset_bottom = 419.0
+offset_left = -43.0
+offset_top = -55.0
+offset_right = 45.0
+offset_bottom = -31.0
 grow_horizontal = 2
-grow_vertical = 2
+grow_vertical = 0
+size_flags_vertical = 6
 theme_override_fonts/font = ExtResource("2_b6djx")
 button_mask = 5
 text = "START"
+
+[node name="Title" type="Label" parent="."]
+texture_filter = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 56.0
+offset_bottom = 75.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("2_b6djx")
+text = "CENTIEPEDE JR."
+horizontal_alignment = 1
+
+[node name="HIGHSCORE" type="Label" parent="."]
+texture_filter = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -109.0
+offset_bottom = -79.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_b6djx")
+text = "HIGH_SCORE: LIKE A 3"
+horizontal_alignment = 1
+
+[node name="CONTROLS" type="Label" parent="."]
+texture_filter = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -9.0
+offset_bottom = 65.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_b6djx")
+text = "CONTROLS:
+A/D - MOVE
+SPACE - DIG"
+horizontal_alignment = 1
+
+[node name="Centipede" type="Node2D" parent="."]
+script = ExtResource("3_nxtq0")
+is_menu = true
 
 [connection signal="pressed" from="START" to="." method="_on_start_pressed"]

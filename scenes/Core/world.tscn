@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://8gww200imsw4"]
+[gd_scene load_steps=21 format=3 uid="uid://8gww200imsw4"]
 
 [ext_resource type="Script" path="res://Scripts/Centipede_Parent.gd" id="1_hxdub"]
 [ext_resource type="Script" path="res://LEVEL_MANAGER.gd" id="1_rrlbx"]
@@ -10,7 +10,6 @@
 [ext_resource type="Texture2D" uid="uid://dt2yx1snpv2k0" path="res://icon.svg" id="6_ud3w4"]
 [ext_resource type="Script" path="res://Scripts/CameraFollow.gd" id="6_x07qx"]
 [ext_resource type="Script" path="res://score_check.gd" id="8_ftavh"]
-[ext_resource type="Shader" path="res://scenes/Core/CHROMATIC.gdshader" id="10_232eb"]
 [ext_resource type="AudioStream" uid="uid://jjw7vmisq24f" path="res://Audio/Music/__ Forked.mp3" id="13_3j3hw"]
 [ext_resource type="Script" path="res://scenes/Core/MusicManager.gd" id="13_rg5xg"]
 
@@ -105,10 +104,6 @@ shader_parameter/palette = ExtResource("6_ud3w4")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_o61j6"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_plsh0"]
-shader = ExtResource("10_232eb")
-shader_parameter/offset = 1.0
-
 [node name="LEVEL_MANAGER" type="Node"]
 script = ExtResource("1_rrlbx")
 
@@ -181,15 +176,6 @@ script = ExtResource("1_hxdub")
 [node name="Camera2D" type="Camera2D" parent="."]
 material = SubResource("ShaderMaterial_o61j6")
 script = ExtResource("6_x07qx")
-
-[node name="CanvasLayer" type="CanvasLayer" parent="Camera2D"]
-
-[node name="CanvasModulate" type="Sprite2D" parent="Camera2D/CanvasLayer"]
-texture_filter = 1
-material = SubResource("ShaderMaterial_plsh0")
-position = Vector2(243, 243)
-scale = Vector2(122.5, 122.5)
-texture = ExtResource("3_ybqhk")
 
 [node name="SpawnEnemy" type="Timer" parent="."]
 wait_time = 5.0

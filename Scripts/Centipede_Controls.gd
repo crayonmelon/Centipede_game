@@ -19,6 +19,10 @@ var turn_speed = 2
 var wrapping = false
 var follow_target = Vector2(0,0)
 
+@export var use_custom_screen_wrap = false
+var custom_screen_wrap_val : Vector4 = Vector4i(0,480,0,480)
+
+
 func _parent_move():
 	rotation_direction = Input.get_axis(GLOBALS.C_CONTROLS[controls_val][0], GLOBALS.C_CONTROLS[controls_val][1]) * turn_speed
 	velocity = transform.x * (speed + (100 if Input.is_action_pressed("1_faster") else 0) * 0 if !started_tunneling else 1)
@@ -61,8 +65,11 @@ func _process(delta):
 			Dies()
 			collision.get_collider().die()
 	
-	screen_wrap()
-
+	
+	if use_custom_screen_wrap:
+		screen_wrap_custom()
+	else:
+		screen_wrap()
 func Dies():
 	health -= 1
 	if health <=0:
@@ -79,7 +86,18 @@ func Change_Shader_Params():
 		$Sprite2D.material.set("shader_parameter/sensitivity", .5)
 	elif health == 1:
 		$Sprite2D.material.set("shader_parameter/sensitivity", .75)
-		
+	
+func screen_wrap_custom():
+	if (position.x > custom_screen_wrap_val.y or position.x < custom_screen_wrap_val.x or 
+	position.y > custom_screen_wrap_val.w or position.y < custom_screen_wrap_val.z):
+
+		get_parent().Set_Sibling_Wrapping(self)
+		wrapping = false
+
+	position.x = wrapf(position.x,custom_screen_wrap_val.x, custom_screen_wrap_val.y)
+	position.y = wrapf(position.y,custom_screen_wrap_val.z, custom_screen_wrap_val.w)
+
+	
 func screen_wrap():
 
 	if (position.x > GLOBALS.WORLD_BORDER_X_MAX or position.x < GLOBALS.WORLD_BORDER_X_MIN or 
